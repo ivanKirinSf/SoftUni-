@@ -1,65 +1,66 @@
-function thePyramidOfKingDjoser(base, increment){
-    
+function pyramid(base, increment) {
+    let row = 0;
 
-
-    let firstStoneBase = base-2;
-    let currentStoneBase = 0;
-    let stoneSteps=0;
-    let totalSteps = 0;
+    let firstStoneBase = base - 2;
+    let stoneBase = 0;
+    let currentStone = 0;
     let stone = 0;
+
     let firstMarbleBase = base;
-    let currentMarbleBase = 0;
-    let currentMarbleSteps = 0;
-    let currentMarble = 0;
-    
-    let totalMarble = 0;
-    
-   
+    let marbleBase = 0;
+    let marble = 0;
 
-    for(let i = firstStoneBase; i >= 1; i-=2 ){
-        stoneSteps++;
-        totalSteps = Math.ceil(stoneSteps/2);
-        currentStoneBase = i;
-        stone += Math.pow(currentStoneBase, 2)*increment;
+    let lapisLazuli = 0;
+
+    let gold = 0;
+
+    let pyramidHeight = 0;
+
+    for (let i = firstStoneBase; i >= 1; i -= 2) {
+        stoneBase = i;
+        currentStone = Math.pow(stoneBase, 2) * increment;
+        stone += currentStone;
+
     }
-    
-    
-    for(let i = firstMarbleBase; i >= 0; i-=2){
-        currentMarbleSteps++;
-        
-        currentMarbleBase = i;
-        currentMarble = (currentMarbleBase-1)*4;
-        
 
-        if(currentMarbleSteps % 5 === 0){
-            currentMarble -= (currentMarbleBase-1)*4
-        
+    for (let i = firstMarbleBase; i >= 1; i -= 2) {
+        row++;
+        marbleBase = i;
+        currentMarble = (marbleBase * 4 - 4) * increment;
+        marble += currentMarble;
+
+        if (row % 5 === 0) {
+            marble = marble - currentMarble
+            lapisLazuli += currentMarble
         }
-        totalMarble += currentMarble;
 
-        
+        else if (marbleBase === 2) {
+            marble = marble - Math.pow(2, 2) * increment;
+            gold = Math.pow(2, 2) * increment;
+        }
 
-        
-        
-        
-        
+        else if (marbleBase === 1) {
+            gold = 1 * increment;
+        }
 
-        
-        
-        
+        pyramidHeight = row * increment;
+
+
+
+
     }
 
 
 
 
-    console.log("-----")
-    console.log(stoneSteps)
-    console.log(`Stone required: ${stone}`)
-    console.log("-----")
-    console.log(totalMarble)
-    
-    
+
+
+    console.log(`Stone required: ${Math.ceil(stone)}`)
+    console.log(`Marble required: ${Math.ceil(marble)}`)
+    console.log(`Lapis Lazuli required: ${Math.ceil(lapisLazuli)}`)
+    console.log(`Gold required: ${Math.ceil(gold)}`)
+    console.log(`Final pyramid height: ${Math.floor(pyramidHeight)}`)
 
 }
 
-thePyramidOfKingDjoser(11,1)
+pyramid(11, 0.75)
