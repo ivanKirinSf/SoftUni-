@@ -29,7 +29,7 @@ function pyramid(base, increment) {
         currentMarble = (marbleBase * 4 - 4) * increment;
         marble += currentMarble;
 
-        if (row % 5 === 0) {
+        if (row % 5 === 0 && marbleBase != 1 && marbleBase != 2) {
             marble = marble - currentMarble
             lapisLazuli += currentMarble
         }
