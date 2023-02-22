@@ -26,16 +26,47 @@ function ladyBugs(input){
         let indexes = input[1];
         let arrIndex = indexes.split(" ");
 
-        position = startCommand + endCommand;
-
-        for(let k = 0; k<arrIndex.length; k++){
+        let k = 0;
+        while(position < fieldSize){
             let index = Number(arrIndex[k]);
+            
+
+            if(startCommand == index){
+                position = 0;
+                position += startCommand + endCommand;
+            };
+
+            if(position == index){
+                position = 0;
+                position += index + endCommand;
+            }else{
+                position = position;
+                
+            }
+
+            if(position >= fieldSize){
+                position = 0;
+                break;
+            }
 
             
 
-            if(startCommand == index && position < fieldSize ){
+            k++
 
-                position = index + endCommand;
+        }
+
+        newIndex.push(position)
+
+        //position = startCommand + endCommand;
+
+        //for(let k = 0; k<arrIndex.length; k++){
+            //let index = Number(arrIndex[k]);
+
+            
+
+            //if(startCommand == index && position < fieldSize ){
+
+                //position += index + endCommand;
 
                 
                 //if(position != index && position < fieldSize ){
@@ -46,17 +77,17 @@ function ladyBugs(input){
                     //position = 0;
                    //}
 
-            } else {
-                position = position
-                break;
+            //} else {
+                //position = position
+                //break;
                 
-            }
+            //}
 
-            if(position == index){
-                position = index + endCommand;
-            } else {
-                break;
-            }
+            //if(position == index){
+                //position += index + endCommand;
+            //} else {
+                //break;
+            //}
 
             //if(position == index && position < fieldSize ){
                 //position = index + endCommand;
@@ -71,7 +102,9 @@ function ladyBugs(input){
             
         }
 
-        newIndex.push(position)
+        console.log(newIndex)
+
+        
 
         
 
@@ -80,12 +113,17 @@ function ladyBugs(input){
     }
 
     
-console.log(newIndex)
+//console.log(newIndex)
     //let text = input.split(" ")
 
     
 
-}
+
+
+//ladyBugs([ 3, '0 1 2',
+//'0 right 1',
+//'1 right 1',
+//'2 right 1'])
 
 ladyBugs([ 3, '0 1 2',
 '0 right 1',
