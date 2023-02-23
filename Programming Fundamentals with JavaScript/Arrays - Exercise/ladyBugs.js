@@ -6,16 +6,9 @@ function ladyBugs(input){
     let arrIndex = indexes.split(" ");
     let newIndex = [];
     let position = 0;
+    let tempPosition = 0;
 
-    //console.log(arrIndex);
-    //let arrIndexes = indexes.split(" ");
-    //let commands = input[2];
-    //let arrCommands = commands.split(" ");
-    //let startCommand = arrCommands[0];
-    //let comand = arrCommands[1];
-    //let endComand = arrCommands[2];
-
-
+    
     for(let i = 2; i<input.length; i++){
         let temp = input[i];
         let commands = temp.split(" ")
@@ -26,80 +19,48 @@ function ladyBugs(input){
         let indexes = input[1];
         let arrIndex = indexes.split(" ");
 
-        let k = 0;
-        while(position < fieldSize){
-            let index = Number(arrIndex[k]);
-            
+        for(let k = 0; k<fieldSize-1; k++){
+            let index = k;
 
-            if(startCommand == index){
-                position = 0;
-                position += startCommand + endCommand;
-            };
+            let j =0;
+            while(j<=arrIndex.length){
+                let jIndex = arrIndex[j];
 
-            if(position == index){
+            if(jIndex == index && startCommand == jIndex){
                 position = 0;
-                position += index + endCommand;
-            }else{
-                position = position;
-                
+                if(command == "right"){
+                    position += jIndex + endCommand;
+
+                } else if(command == "left"){
+                    position += jIndex - endCommand;
+                }
             }
 
-            if(position >= fieldSize){
+            if(startCommand == position){
                 position = 0;
-                break;
+                if(command == "right"){
+                    position += startCommand + endCommand;
+                }else if(command == "left"){
+                    position += startCommand - endCommand;
+                }
+
             }
 
             
 
-            k++
-
+            
+            j++;
+        }
+       if(position == 0){
+        newIndex.push(0);
+       } else if(position > 0){
+        newIndex.push(position)
+        position = 0;
+       }
         }
 
         newIndex.push(position)
 
-        //position = startCommand + endCommand;
-
-        //for(let k = 0; k<arrIndex.length; k++){
-            //let index = Number(arrIndex[k]);
-
-            
-
-            //if(startCommand == index && position < fieldSize ){
-
-                //position += index + endCommand;
-
-                
-                //if(position != index && position < fieldSize ){
-                    //position = position;
-                //} else if(position == index && position < fieldSize ){
-                   // position = index + endCommand;
-                //} else{
-                    //position = 0;
-                   //}
-
-            //} else {
-                //position = position
-                //break;
-                
-            //}
-
-            //if(position == index){
-                //position += index + endCommand;
-            //} else {
-                //break;
-            //}
-
-            //if(position == index && position < fieldSize ){
-                //position = index + endCommand;
-            //} else if (position != index && position < fieldSize ){
-                //position = position
-            //} else if (position > fieldSize){
-                //break;
-           // }
-
-            
-
-            
         }
 
         console.log(newIndex)
@@ -107,25 +68,13 @@ function ladyBugs(input){
         
 
         
+            
+           
+            
+        }
 
         
-        
-    }
 
-    
-//console.log(newIndex)
-    //let text = input.split(" ")
-
-    
-
-
-
-//ladyBugs([ 3, '0 1 2',
-//'0 right 1',
-//'1 right 1',
-//'2 right 1'])
-
-ladyBugs([ 3, '0 1 2',
-'0 right 1',
-'1 right 1',
-'2 right 1'])
+        ladyBugs([ 5, '3',
+        '3 left 2',
+        '1 left -2'])
