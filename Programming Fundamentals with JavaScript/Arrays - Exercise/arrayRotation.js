@@ -1,26 +1,24 @@
-function arrayRotation(arr, rotationCount){
+function addAndSubtract (arr){
+    let newArr = [];
+    let sumArr = 0;
+    let newArrSum = 0;
 
-    let buffArr = []; 
-
-    for(let i = 0; i<rotationCount; i++){
-
-        let currEl = arr[0];
-
-        for(let k = 1; k<arr.length; k++){
-
-            buffArr.push(arr[k]);
-
-
+    for(let i = 0; i< arr.length; i++){
+        let temp = arr[i];
+        sumArr += temp;
+        if(temp % 2 === 0){
+            temp += i;
+            newArr.push(temp);
+            newArrSum += temp;
+        }else {
+            temp -= i;
+            newArr.push(temp);
+            newArrSum += temp;
         }
-
-        buffArr.push(currEl);
-        arr = buffArr;
-        buffArr = [];
-
     }
 
-    console.log(arr.join(" "))
+    console.log(newArr);
+    console.log(sumArr);
+    console.log(newArrSum);
 
 }
-
-arrayRotation([51, 47, 32, 61, 21], 2)
