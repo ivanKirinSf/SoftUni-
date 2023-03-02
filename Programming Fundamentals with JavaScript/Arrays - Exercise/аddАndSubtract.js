@@ -1,45 +1,25 @@
-function addAndSubtract(arr){
+function addAndSubtract (arr){
+    let newArr = [];
+    let sumArr = 0;
+    let newArrSum = 0;
 
-    let oldSum = 0;
-
-    let newSum = 0;
-
-    
-    for(let i = 0; i<arr.length; i++){
-        let curNum = arr[i];
-        oldSum += curNum;
-
-        if(curNum % 2 === 0 ){
-
-            
-
-            curNum += i;
-            
-            arr[i] = curNum;
-
-        } else {
-
-            
-
-            
-            curNum -= i;
-
-            
-            arr[i] = curNum;
-
+    for(let i = 0; i< arr.length; i++){
+        let temp = arr[i];
+        sumArr += temp;
+        if(temp % 2 === 0){
+            temp += i;
+            newArr.push(temp);
+            newArrSum += temp;
+        }else {
+            temp -= i;
+            newArr.push(temp);
+            newArrSum += temp;
         }
+    }
 
-        newSum += curNum
-
-       
-   
-
-
-}
-
-console.log(arr)
-console.log(oldSum);
-console.log(newSum);
+    console.log(newArr);
+    console.log(sumArr);
+    console.log(newArrSum);
 
 }
 
