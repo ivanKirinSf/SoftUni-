@@ -1,67 +1,80 @@
-function ladybugs(input){
+function ladybugs(input) {
 
-  
+    let field = []
+    let size = Number(input[0]);
+    for (let i = 0; i < size; i++) {
+        field[i] = 0;
 
-    let field = [];
-    let size =  Number(input[0]);
-    for(let f = 0; f< size; f++){
-        field[f] = 0;
     }
-    
-        
-    
-    
-
-    let bugs = input[1].split(" ");
-      
-    for(let b = 0; b < bugs.length; b++){
-        let bugsIndex = Number(bugs[b]);
-       
-        if(field[bugsIndex] == 0){
-            field[bugsIndex] = 1;
+    let indexOfLadybugs = input[1].split(" ");
+    for (let i = 0; i < indexOfLadybugs.length; i++) {
+        let index = indexOfLadybugs[i];
+        if (field[index] !== undefined) {
+            field[index] = 1;
         }
 
-}
 
-for(let i = 2; i<input.length; i++ ){
-    let commands = input[i].split(" ");
-    start = Number(commands[0]);
-    direction = commands[1];
-    end = Number(commands[2]);
+    }
 
-    if(direction === "right"){
-        if(field[start] == 0 ){
-            let move = start + end;
-            if(move+1 < size){
-            field[move] = 1;
-            }
-            
-        }else if(field[start] == 1){
-            start += end;
-            
-        } else {
+
+    for (let i = 2; i < input.length; i++) {
+        let commands = input[i].split(" ");
+        let indexLadybug = Number(commands[0]);
+        let direction = commands[1];
+        let flyLength = Number(commands[2]);
+
+        if (indexLadybug >= field.length || indexLadybug < 0 || field[indexLadybug] == 0) {
             continue;
         }
+
+        field[indexLadybug] = 0;
+        let isFly = true;
+
+        if (direction === "right") {
+
+            while (isFly) {
+                if (field[indexLadybug + flyLength] === 0) {
+                    field[indexLadybug + flyLength] = 1;
+                    isFly = false;
+
+                } else if (field[indexLadybug + flyLength] === 1) {
+                    flyLength += flyLength;
+                } else {
+                    isFly = false;
+                }
+            }
+        } else {
+            while (isFly) {
+                if (field[indexLadybug - flyLength] === 0) {
+                    field[indexLadybug - flyLength] = 1;
+                    isFly = false;
+                } else if (field[flyLength] === 1) {
+                    flyLength += flyLength;
+                } else {
+                    isFly = false;
+                }
+            }
+        }
     }
+
+    console.log(field.join(" "))
 }
 
 
 
+ladybugs([3, '0 1',
+    '0 right 1',
+    '2 right 1']
+)
+console.log('----------------------------------')
 
+ladybugs([3, '0 1 2',
+    '0 right 1',
+    '1 right 1',
+    '2 right 1'])
+console.log('----------------------------------')
 
-
-    }
-    
-
-
-
-
-
-
-
-
-
-
-ladybugs([ 3, '0 1',
-'0 right 1',
-'2 right 1' ])
+ladybugs([5, '3',
+    '3 left 2',
+    '1 left -2']
+)
