@@ -1,16 +1,44 @@
 function charactersInRange(charA, charB) {
 
-    let numFromCharA = charA.charCodeAt(0);
-    let numFromCharB = charB.charCodeAt(0);
+    let numFromCharA = convertFromCharToNumber(charA);
+    let numFromCharB = convertFromCharToNumber(charB);
 
-    let startIndex = numFromCharA > numFromCharB ? numFromCharB : numFromCharA;
-    let endIndex = numFromCharA > numFromCharB ? numFromCharA : numFromCharB;
-    buff = ""
+    let startIndex = smallestOfTwoNumbers(numFromCharA, numFromCharB)
+    let endIndex = biggestOfTwoNumbers(numFromCharA, numFromCharB); 
+    buff = ""; 
 
    for(let i = startIndex +1; i < endIndex; i++){
-    buff += String.fromCharCode(i) + " ";
+    
+
+    buff = concatenationString(buff, convertFromNumberToChar(i));
    }
 
 
-   console.log(buff)
+   console.log(buff);
+
+   function concatenationString(buff, string){
+    buff += string + " "
+    return buff 
+  }
+  
+  
+  
+  function convertFromNumberToChar(num){
+  
+      return String.fromCharCode(num)
+  
+  }
+  
+  function convertFromCharToNumber(char){
+      return char.charCodeAt(0);
+  
+  }
+  
+  function smallestOfTwoNumbers(a, b) {
+      return Math.min(a, b); 
+  }
+  
+  function biggestOfTwoNumbers(a, b) {
+      return Math.max(a, b); 
+  }
 }
