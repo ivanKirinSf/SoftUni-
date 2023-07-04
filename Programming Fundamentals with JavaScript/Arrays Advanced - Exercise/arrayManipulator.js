@@ -1,53 +1,43 @@
-function arrayManipulator(numbers, commands){
+function arrayManipulator(arr1, arr2){
 
-    for(let command of commands) {
-        let tokens = command.split(' ');
+    let numbers = arr1.map(Number)
 
-        if(tokens[0] === 'add') {
-            let index = Number(tokens[1]);
-            let element = Number(tokens[2]);
-            numbers.splice(index, 0, element);
+    
+
+    for(let i = 0; i < arr2.length; i++){
+        let temp = arr2[i].split(" ");
+
+        let command = temp.shift();
+
+        if(command === "add"){
+
+            let index = temp[0];
+            let element = Number(temp[1]);
+
+            numbers.splice(index,0,element);           
+
+        } else if (command === "addMany"){
+
+            let index = Number(temp[0]);
             
-        } else if(tokens[0] === 'addMany'){
-            let index = Number(tokens[1]);
-            tokens.splice(0,2);
-            let numToAdd = tokens.map(Number);
-            numbers.splice(index, 0, ...numToAdd);
-                
-        } else if(tokens[0] === 'contains'){
-            let result = numbers.indexOf(Number(tokens[1]));
-            console.log(result);
-        } else if(tokens[0] === 'remove'){
-            let index = Number(tokens[1]);
-            numbers.splice(index, 1);
-        } else if(tokens[0] === 'shift'){
-            let positions = tokens[1];
-            for(let i = 0; i<positions; i++){
-                let firstNum = numbers.shift();
-                numbers.push(firstNum);               
+            let elements = temp.slice( 1, temp.length);
 
-            }
-            console.log(numbers)
-        } else if(tokens[0] === 'sumPairs'){
+            let numToAdd = elements.map(Number);           
 
-            let res = [];
-            if(numbers.length % 2 !== 0){
-                numbers.push(0);
-            }
-
-            for(let i = 0; i < numbers.length-1 ; i+= 2){
-                let sum = numbers[i] + numbers[i+1]; 
-                res.push(sum);
-            }
-            numbers = res;
             
 
-        } else if(tokens[0] === 'print'){
-            console.log(`[ ${numbers.join(", ")} ]`);
-            return;
+            numbers.splice(index, 0, ...numToAdd)
+
+            
+            
         }
 
+
+        
+        
     }
+
+    console.log(numbers)
 
 
 
