@@ -26,17 +26,25 @@ function buildAWall(input){
             if(tempMin < min){
                 min = tempMin;
             }
+
         }
+
     }
 
     let daysLeft = 30 - min;
 
     let arr = input;
 
+    let arrConcrete = [];
+
+    
+
+
     for(let j = 1; j < daysLeft+1; j++){
 
-        let concreteDaily = 0
-        
+        let concreteDaily = 0;
+
+                     
         for(let a = 0; a<arr.length; a++){
             let tempA = Number(arr[a]);
 
@@ -50,12 +58,33 @@ function buildAWall(input){
 
             }
 
-        }
+        }    
 
-        console.log(arr)
+        arrConcrete.push(concreteDaily)
 
-    }  
+    }
 
+    console.log(arrConcrete.join(", "))
+
+    let finalCost = 0;
+
+    let sum = 0;
+
+    for(let b = 0; b < arrConcrete.length; b++){
+
+        let temp = Number(arrConcrete[b]);
+
+        sum += temp;       
+        
+    }
+
+    finalCost = sum*1900;       
+
+    //if(daysLeft >= 0 && daysLeft <=30)
+    //console.log(`${finalCost} pesos`)
+   
+
+    console.log(`${finalCost} pesos`)
 }
 
 buildAWall([21, 25, 28])
