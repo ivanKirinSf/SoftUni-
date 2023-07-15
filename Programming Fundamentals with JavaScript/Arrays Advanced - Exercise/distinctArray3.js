@@ -7,7 +7,14 @@ function distinctArray(input){
     for(let i = 0; i<arr.length; i++){
         let temp = Number(arr[i]);
 
-        newArr.push(temp)
+        if(newArr.indexOf(temp) === -1){
+
+            newArr.push(temp)
+
+        }else{
+            continue;
+        }
+        
 
              
         arr.splice(i, 1);
@@ -22,9 +29,7 @@ function distinctArray(input){
         }
     }
 
-    console.log(newArr.join(" "))
-
-       
+    console.log(newArr.join(" "))   
 
 }
 
