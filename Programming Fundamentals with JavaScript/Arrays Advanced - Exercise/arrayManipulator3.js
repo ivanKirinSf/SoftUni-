@@ -18,28 +18,46 @@ function arrayManipulator(arr1, arr2){
         let index = Number(temp[1]);
         temp.splice(0,2);
         let numsToAdd = temp.map(Number);
-        numbers.splice(index, 0, ...numsToAdd)
-
-        console.log(numsToAdd)
+        numbers.splice(index, 0, ...numsToAdd);
+        
        }else if(command === "contains"){
         let element = Number(temp[1]);
         let index = numbers.indexOf(element)
         console.log(index);
-       }       
+       }else if(command === "remove"){
+         let index = temp[1];
+         numbers.splice(index, 1);
+       }else if(command === "shift"){
+         let positions = Number(temp[1]);
+         for(let i = 0; i<positions; i++){
+            let firstNum = numbers.shift();
+            numbers.push(firstNum);
+         }
+       }else if(command === "sumPairs"){
+        let newArr = []
 
-    } 
-    
-    console.log(numbers)
+        if(numbers.length %2 !== 0){
+            numbers.push(0)
+        }
+
+        for(let i = 0; i < numbers.length; i+=2){
+            let first = Number(numbers[i]);
+            let second = Number(numbers[i+1]);
+            let sum = first + second;
+            newArr.push(sum);            
+        }
+
+        numbers = newArr
+
+       } else if(command === "print"){
+        return console.log(`[ ${numbers.join(", ")} ]`)
+       }     
+
+    }      
 
 }
 
 arrayManipulator(
     [1, 2, 3, 4, 5],
-    [
-        //'add 1 8', 
-        //'addMany 5 9 8 7 6 5'
-        'contains 16', 
-        //'contains 3', 
-        //'print'
-    ]
+['addMany 5 9 8 7 6 5', 'contains 15', 'remove 3', 'shift 1', 'print']
     )
