@@ -11,34 +11,48 @@ function manOWar(input) {
         let command = tokens[0];
         let values = tokens.slice(1).map(Number);
 
-        //switch (command) {
+        switch (command){
+            case "Fire": fire(warship, values[0], values[1]); break;
+            case "Defend": defend(piratShip, values[0], values[1], values[2]); break;
+            case "Repair": repair(piratShip, values[0], values[1], maxHealth); break;
+            case "Status": status(piratShip, maxHealth); break;
+            case "Retair": {
+                console.log(`Pirate ship status: ${piratShip.reduce((a,c)=> a + c, 0)}`);
+                console.log(`Warship status: ${warship.reduce((a,c) => a + c, 0)}`);
+                break;
+            }
 
-           // case "Fire":
-            //case "Defend":
-            //case "Repair":
-            //case "Status":
-            //case "Retair":
-
-        //}
+        }
 
     }
 
-    function Fire(warship, index, damage){
+    function isShipDead(ship){
+        ship.
+    }
+
+    function fire(warship, index, damage){
         if(index >= 0 && index < warship.length) {
             warship[index] -= damage;
         }
     }
 
-    function Defend(piratShip, startIndex, endIndex, damage){
+    function defend(piratShip, startIndex, endIndex, damage){
         if(startIndex >= 0 && startIndex < warship.length && endIndex >= 0 && endIndex < warship.length) {
             piratShip[index] -= damage;
         }
     }
 
-    function repair(ship, index, heal){
+    function repair(ship, index, heal, maxHealth){
         if(index >= 0 && index < ship.length) {
-            warship[index] -= damage;
+
+            let missingHealth = maxHealth - ship[index];
+            ship[index] += Math.min(missingHealth, heal);
         }
+    }
+
+    function status(ship, maxHealth){
+        let damegedSections = ship.filter(x => x<maxHealth*0.2);
+
     }
 
 
