@@ -2,121 +2,135 @@ function manOWar(input){
 
 let pirateShip = input.shift().split(">").map(Number);
 let warship = input.shift().split(">").map(Number);
-let healthCap = Number(input.shift());
-let pirateShipSum = 0;
-let warshipSum = 0;
+let maxHealth = input.shift();
+let gameOver = false;
 
-index = 0;
-while(index < input.length){
-    let temp = input[index].split(" ");
+for(let i = 0; i < input.length; i++){
+    let temp = input[i].split(" ");
     let command = temp.shift();
+    
 
     if(command === "Fire"){
-        let indexFire = Number(temp.shift());
-        let damage = Number(temp.shift());
-
-        if(indexFire >= 0 && indexFire < warship.length){            
-        
-            let sectionHealth = Number(warship[indexFire]);
-            let res = sectionHealth - damage;
-            if(res <= 0){
-
-                return console.log(`You won! The enemy ship has sunken.`);
-                
-            } else {
-                warship.splice(indexFire, 1, res)
-            }
+        let amount1 = temp.shift();
+        let amount2 = temp.shift();
+        let fireToWarship = fire(warship, amount1, amount2);
+        if(gameOver === true){
             
-        }
-        //console.log(damage)
-    }else if(command === "Defend"){
-        let startIndex = Number(temp.shift());
-        let endIndex = Number(temp.shift());
-        let damage = Number(temp.shift());
-
-        if(startIndex >= 0 && startIndex < endIndex && endIndex > startIndex && endIndex < pirateShip.length){
-            indexD = startIndex;
-            while(indexD <= endIndex){
-                let sectionHealth = Number(pirateShip[indexD]);
-                let res = sectionHealth - damage;
-                if( res <= 0){
-
-                    return console.log(`You lost! The pirate ship has sunken.`);
-
-                } else {
-                    pirateShip.splice(indexD, 1, res);
-                }
-                indexD++
-            }
+            break;
         } 
 
-    }else if(command === "Repair"){
-        let indexRepair = Number(temp.shift());
-        let heal = Number(temp.shift());
-        let res = Number(pirateShip[indexRepair]) + heal;
-        if(res >= healthCap){
-
-            res = healthCap;
-
-            pirateShip.splice(indexRepair, 1, res);
-
-        } else {
-
-            pirateShip.splice(indexRepair, 1, res)
-
-        }
-        //console.log(heal)
-
-    }else if(command === "Status"){
-        let sectionForRepair = healthCap*0.20;
-        let count = 0;
-
-        for(let i = 0; i<pirateShip.length; i++){
-            let sectionHealth = Number(pirateShip[i]);
-            if(sectionHealth < sectionForRepair){
-
-                count+=1;
-            }
-
-        }
-        console.log(`${count} sections need repair.`);
-
-        } else if(command === "Retire"){
-
+    }else if(command === "Defend"){
+        let amount1 = temp.shift();
+        let amount2 = temp.shift();
+        let amount3 = temp.shift();
+        let defendThePirateShip = defend(pirateShip, amount1, amount2, amount3);
+        if(gameOver === true){
             break;
-
         }
+    }else if(command === "Repair"){
+        let amount1 = temp.shift();
+        let amount2 = temp.shift();
+        let repairPirateShip = repair(pirateShip, amount1, amount2, maxHealth);     
+        
+    }else if(command === "Status"){
+        let statusPirateShip = status(pirateShip);
+    }else if(command === "Retire"){
+
+        break;
+    }    
 
     //console.log(command)
+}
 
-    index++
+
+if(gameOver !== true){
+
+    let pirateShipSum = 0;
+    for(let p = 0; p < pirateShip.length; p++){
+        let tempP = Number(pirateShip[p]);
+        pirateShipSum += tempP;
+    }
+    
+    let warshipSum = 0;
+    for(let w = 0; w < warship.length; w++){
+        let tempW = Number(warship[w]);
+        warshipSum += tempW;
+    }
+    
+    console.log(`Pirate ship status: ${pirateShipSum}`+`\n`+`Warship status: ${warshipSum}`);
 
 }
 
-//console.log(pirateShip)
-//console.log(warship)
+   
 
-index = 0;
-while(index < pirateShip.length){
-    let temp = Number(pirateShip[index]);
+function fire(warship, index, damage){
+    let indexSection = Number(index);
+    let attackDamage = Number(damage);
 
-    pirateShipSum += temp;
-
-    index++;    
+    if(indexSection >= 0 && indexSection < warship.length){
+        let sectionHealth = warship[indexSection];
+        let res = sectionHealth - attackDamage;
+        if(res <= 0){  
+            gameOver = true;                       
+            return console.log(`You won! The enemy ship has sunken.`);
+                    
+        }else {
+            warship.splice(indexSection, 1, res);
+        }
+    }
 }
 
-index = 0;
-while(index < warship.length){
-    let temp = Number(warship[index]);
+function defend(pirateShip, startIndex, endIndex, damage){
+    let start = Number(startIndex);
+    let end = Number(endIndex);
+    let attackDamage = Number(damage);
 
-    warshipSum += temp;
+    if(start >= 0 && start < end && end> start && end < pirateShip.length){
+        for(let i = start; i <= end; i++){
+            let sectionHealth = Number(pirateShip[i]);
+            let res = sectionHealth - attackDamage;
+            if( res <= 0){
 
-    index++;
+                gameOver = true;
+                return console.log(`You lost! The pirate ship has sunken.`)
+
+            }else {
+
+                pirateShip.splice(i, 1, res);
+
+            }
+        }
+    }
 }
 
-console.log(`Pirate ship status: ${pirateShipSum}`+`\n`+`Warship status: ${warshipSum}`);
+function repair(pirateShip, index, health, maxHealth){
+    let indexRepair = Number(index);
+    if(indexRepair >= 0 && indexRepair < pirateShip.length){
+        let sectionHealth = Number(pirateShip[indexRepair]);
+        let res = sectionHealth + Number(health);
+        if(res < maxHealth){
+            sectionHealth = res;
+            pirateShip.splice(indexRepair, 1, sectionHealth);
+        }else {
+            sectionHealth = maxHealth;
+            pirateShip.splice(indexRepair, 1, sectionHealth)
+        }
+    }
+}
 
-//console.log(pirateShip)
-//console.log(warship)
+function status(pirateShip){
+    let count = 0;
+    for(let i = 0 ; i < pirateShip.length; i++){
+        let pirateShipSection = Number(pirateShip[i]);
+        if(pirateShipSection < maxHealth*0.2){
+           count +=1;
+        }
+    }
+
+    return console.log(`${count} sections need repair.`);
+
+}
+
+//console.log(pirateShip);
 
 }
