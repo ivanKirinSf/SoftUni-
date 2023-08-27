@@ -2,7 +2,7 @@ function treasureHunt(input){
 
     let chest = input.shift().split("|");
     let commands = input;
-    
+
     for(let el of commands){
         let token = commands.shift()
         while ( token !== "Yohoho!"){
@@ -16,43 +16,64 @@ function treasureHunt(input){
                             continue;
                         } else {
                             chest.unshift(el);
-                        }
-                        
-                    };break;
+                        }                        
+                    };
+                    break;
                     case "Drop":
                         let index = Number(list);
                         if(index >= 0 && index < chest.length){
                         let item = chest[index];
                         chest.splice(index, 1);
                         chest.push(item);
-                        }
+                        };
+                        break;
+                        case "Steal":
+                            let count = Number(list.shift());
+                            let start = chest.length - count;
+                            let lastItems = [];
+                            if(start >= 0){
+                                lastItems = chest.splice(start, count); 
+                            }else {
+                                lastItems = chest.splice(0, count); 
+                            }
+                            console.log(lastItems.join(", ")); 
+                            break;
+                            case "Yohoho!":
+                                break;                     
+
+                                      
+
                         
 
-                        //console.log(chest)
-                        
-
-
-                    //console.log(items)
-            }       
-            
-            //console.log(command);
-
-            token = commands.shift()
-
-            
+            }      
+                     
+            token = commands.shift();        
             
         }
     }
 
-    console.log(chest)
-    
+    let sumItems = 0 ;
+    let avg = 0;
 
+    for(let i = 0; i < chest.length; i++){
+        let temp = chest[i];
+        sumItems += temp.length;
+    }
+
+    if(chest.length > 0){
+        avg = sumItems / chest.length;
+        console.log(`Average treasure gain: ${avg.toFixed(2)} pirate credits.`)
+    }else {
+        console.log("Failed treasure hunt.")
+    }
+
+    //console.log(sumItems)  
 
 }
 
-treasureHunt(["Gold|Silver|Bronze|Medallion|Cup",
-//"Loot Wood Gold Coins",
-//"Loot Silver Pistol",
-"Drop 3",
-//"Steal 3",
+treasureHunt(["Diamonds|Silver|Shotgun|Gold",
+"Loot Silver Medals Coal",
+"Drop -1",
+"Drop 1",
+"Steal 6",
 "Yohoho!"])
