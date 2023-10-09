@@ -1,45 +1,25 @@
 function inventory(input){
 
-    let hero = {};
-    let arr = [];
-    let minLevel = Number.MAX_SAFE_INTEGER
+let res = [];
 
-    for(let i = 0; i<input.length; i++){
-        let temp = input[i].split(" / ");
-        let heroName = temp.shift();
-        let heroLevel = Number(temp.shift());        
-        let heroItems = temp.shift().split(" , ")
-        //console.log(heroItems)
-
-        hero.Hero = heroName;
-        hero.level = heroLevel;
-        hero.items = heroItems;
-
-        if(heroLevel < minLevel){
-            minLevel = heroLevel;
-            arr.unshift(hero);
-            hero = {};
-        }else{
-            arr.push(hero);
-            hero = {};
-        }       
-        
+for(let line of input){
+    let [name, level, items] = line.split(" / ");
+    let heroes = {
+        heroes: name,
+        heroes: Number(level),
+        heroes: items,
     }
+    res.push(heroes)
+}
 
-    for(let k = 0; k<arr.length; k++){
-        let temp = arr[k];
-         for(let key of Object.keys(temp)){
-        if(key === 'Hero'){
-            console.log(`${key}: ${temp[key]}`)
-        }else if(key === 'level'){
-            console.log(`${key} => ${temp[key]}`)            
-        }else{
-            console.log(`${key} => ${temp[key]}`)
-        }
-    }
+res.sort((heroesA, heroesB) => heroesA - heroesB);
 
-        
-    }  
+for(let heroes of res){
+    console.log(`Hero: ${heroes[`name`]}`);
+    console.log(`level : ${heroes.level}`);
+    console.log(`items: ${heroes.items}`);
+}
+
 
 }
 
