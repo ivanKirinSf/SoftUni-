@@ -1,25 +1,23 @@
-function makeAnDictionary(input){
+function makeADictionary(data){
 
-    let obj = {}
-    let arr = []
+let collection = {};
 
-    
-        for(let el of input ){
-
-            let temp = el.split(":");
-            let terms = temp.shift();
-            let description = temp.shift();
-
-            obj.terms = terms;
-            obj.description = description;
-
-            arr.push(obj)
-            console.log(arr)
-        }
-        
+for(let line of data){
+    let obj = JSON.parse(line);
+    let keys = Object.keys(obj);
+    let key = keys[0];
+    collection[key] = obj[key];
 }
 
-makeAnDictionary([
+let sortKey = Object.keys(collection).sort((keyA, keyB)=> keyA.localeCompare(keyB));
+
+for(let key of sortKey){
+    console.log(`Term: ${key} => Definition: ${collection[key]}`)
+}
+
+}
+
+makeADictionary([
     '{"Coffee":"A hot drink made from the roasted and ground seeds (coffee beans) of a tropical shrub."}',
     '{"Bus":"A large motor vehicle carrying passengers by road, typically one serving the public on a fixed route and for a fare."}',
     '{"Boiler":"A fuel-burning apparatus or container for heating water."}',
