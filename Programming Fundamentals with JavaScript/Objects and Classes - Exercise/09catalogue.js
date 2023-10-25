@@ -1,37 +1,32 @@
+
 function catalogue(input){
 
     let obj = {};
 
     for(let line of input){
         let [name, price] = line.split(" : ");
-        let key = name;
-        obj[key] = Number(price);           
+        obj[name] = Number(price);
     }
 
-    let sort = Object.keys(obj).sort((a,b)=> a.localeCompare(b));
+    //console.table(obj)
+
+    let sortObj = Object.keys(obj).sort((a,b)=> a.localeCompare(b));
 
     let firstChar = "";
-    for(let key of sort){
-        
-        let name = key;  
-        
-        let firstChar = "";
+    for(let key of sortObj){
 
-        if(firstChar !== name[0]){
-            firstChar = name[0];
-            console.log(firstChar);
+        if(firstChar !== key[0]){
+            firstChar = key[0];
+            console.log(firstChar)
         }
 
-        let price = obj[key]
+        let price = obj[key];
 
-        console.log(`  ${name} : ${price}`)
+        console.log(`  ${key}: ${price}`)
 
-        
-
-        //console.log(key)
     }
-
 }
+
 
 catalogue([
     'Appricot : 20.4',
