@@ -1,6 +1,38 @@
+
+let storageObj = {}
+
 class Storage{
     constructor(capacity){
         this.capacity = capacity;
+    }
+
+    
+
+    addProduct(product){        
+
+        if(this.capacity > 0){
+
+        this.capacity -= product.quantity;
+
+        if(this.capacity > 0){
+
+        this.name = product.name;
+        this.price = product.price;
+        this.quantity = product.quantity;
+        this.totalCost += product.price*product.quantity;        
+
+        }        
+
+        }       
+
+    }
+
+    getProducts(){
+
+        let text = JSON.stringify(storage);
+
+        console.log(text)
+
     }
 }
 
