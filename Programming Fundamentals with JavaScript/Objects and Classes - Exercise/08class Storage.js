@@ -1,24 +1,28 @@
 class Storage{
     constructor(capacity){
+        this.storage = [];
         this.capacity = capacity;
         this.totalCost = 0;
-        this.storage = [];
     }
 
     addProduct(product){
 
         this.storage.push(product);
         this.capacity -= product.quantity;
-        this.totalCost += product.quantity*product.price
-
+        this.totalCost += product.quantity*product.price;
+        
     }
 
-    getProcuts(){
-        let text = storage.map(product => JSON.stringify(product));
+    getProducts(){
+
+        let text = this.storage.map(product => JSON.stringify(product));
+
         return text.join(`\n`)
-    }
-}
 
+    }
+
+
+}
 
 let productOne = {name: 'Cucamber', price: 1.50, quantity: 15};
 let productTwo = {name: 'Tomato', price: 0.90, quantity: 25};
