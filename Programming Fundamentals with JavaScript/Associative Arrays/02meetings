@@ -1,0 +1,34 @@
+function meetings(input){
+    let obj = {};
+
+    for(let str of input){
+        let temp = str.split(" ");
+        let key = temp.shift();
+        let value = temp.shift();        
+        
+        if(obj.hasOwnProperty(key)){
+
+            console.log(`Conflict on ${key}!`)
+
+            continue;
+
+        }else{
+            obj[key] = value; 
+            console.log(`Scheduled for ${key}`)
+        }
+
+         
+    }
+
+    let entries = Object.entries(obj);
+
+    for(let el of entries){
+        let temp = el;
+        let day = temp.shift();
+        let name = temp.shift();
+
+        console.log(`${day} -> ${name}`)
+    }
+
+    
+}
