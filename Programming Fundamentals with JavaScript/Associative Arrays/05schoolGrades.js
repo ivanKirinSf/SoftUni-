@@ -33,10 +33,10 @@ function schoolGrades(input){
         gradesArr.push(averageGrade);
 
         for(let el of gradesArr){
-            totalAverage += el;
-
-            socArr.set(name, totalAverage);
+            totalAverage += el;            
         }
+
+        socArr.set(name, totalAverage/gradesArr.length);
             
         //socArr.set(name, (averageGrade + oldGrade)/2);
 
@@ -44,7 +44,7 @@ function schoolGrades(input){
         for(let el of grades.map(Number)){
             totalGrade += Number(el);
         }
-    
+
         averageGrade = totalGrade/grades.length;
         socArr.set(name, averageGrade)        
     }
@@ -59,11 +59,10 @@ function schoolGrades(input){
 
 }
 
-schoolGrades([
-//'Lilly 4 6 6 5',
-'Tim 5 6',
-//'Tammy 2 4 3',
-'Tim 6 6',
-'Tim 3 4 5'
-]
+schoolGrades(
+    ['Steven 3 5 6 4',
+'George 4 6',
+'Tammy 2 5 3',
+'Steven 6 3']
+
 )
