@@ -1,47 +1,60 @@
 function schoolGrades(input){
 
-    let studentInfo = [];
+let studentsInfo =[];
+
+for(let el of input){
+    let temp = el.split(" ");
+    let name = temp.shift();
+    let grades = temp.map(Number);
+
+    console.log(grades);
+
+    if(studentsInfo.hasOwnProperty(name)){
+
+        for(let i of grades){
+            studentsInfo[name].push(i);
+        }
+        
+    }else{
+        studentsInfo[name] = grades;
+    }
+}
+
+function average(input){
+    let totalGrades = 0;
+    let averageGrade = 0;
 
     for(let el of input){
-        let temp = el.split(" ");
-        let name = temp.shift();
-        let grades = temp.map(Number);
-        //console.log(grades);
-
-        if(studentInfo.hasOwnProperty(name)){
-            for(let i of grades){
-                studentInfo[name].push(i)
-            }
-        }else {
-            studentInfo[name] = grades;
-        }
+        totalGrades += el;
     }
+    averageGrade = totalGrades/input.length;
+        
+        //console.log(averageGrade)
+        studentsInfo[el] = averageGrade.toFixed(2);
+}
 
-        function average(input){
-            for(let el of input){
-                let total = 0;
-                total += el;
+for (el in studentsInfo){
+    average(studentsInfo[el])
+}
 
-                let average = total/input.length;
-                studentInfo[key] = average.toFixed(2);
-            }
-        }
+studentsInfo.sort((a,b) => a[0].localeCompare(b[0]));
 
-        for(let key of studentInfo){
+let entries = Object.entries(studentsInfo);
+for(key in entries){
 
-            average(studentInfo[key]);
-        }      
+    console.log(`${key}: ${entries[key]}`)
 
-        let entries = Object.entries(studentInfo);
-
-            entries.sort((a, b) => a[0].localeCompare(b[0]));
-
-            for(let key of entries){
-                console.log(`${key}: ${entries[key]} `)
-            }     
+}
 
 
     }
 
+
+schoolGrades([
+//'Lilly 4 6 6 5',
+'Tim 5 6',
+//'Tammy 2 4 3',
+//'Tim 6 6'
+])
 
 
