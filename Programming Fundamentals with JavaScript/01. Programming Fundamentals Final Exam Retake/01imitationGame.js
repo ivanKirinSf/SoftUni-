@@ -17,10 +17,20 @@ function imitationGame(input){
             console.log(num)
             
         }
+
+        
     }
 
+    let text = ""
+    let arr = message.split("");
+    for(let i = 0; i<arr.length; i++){
+        text += arr[i] 
+    }
+
+    console.log(text)
+
     //let num = message.includes(z)
-    console.log(num)
+    //console.log(num)
 }
 
 imitationGame([
