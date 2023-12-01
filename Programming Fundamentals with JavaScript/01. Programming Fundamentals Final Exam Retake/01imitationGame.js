@@ -34,9 +34,19 @@ function imitationGame(input){
             
         }else if(command === "Insert"){
             let index = Number(temp.shift());
-            let value = temp;
+            let value = temp.shift().split("");
+            
+            console.log(value);
 
-            arr.splice(index,0, value)
+            if(index >= 0 || index <= message.length-1){
+
+                for(let char of value){
+                    arr.splice(index,0, char);
+                    index += 1;
+                }
+                
+            }
+            
             //console.log(value)
         }else if(command === "Move"){
             let firstN = Number(temp);
@@ -50,25 +60,27 @@ function imitationGame(input){
 
 
             //console.log(firstChar)
-        }else if(command === "Decode"){
+        }else if(command === "Decode"){           
 
-            for(let a = 0; a < arr.length; a++){
-                let tempA = arr[a];
-                str += tempA;        
-            }
-
-            console.log(`The decrypted message is: ${str}`)
+            break;
 
         }
         
     }
+
+    for(let a = 0; a < arr.length; a++){
+        let tempA = arr[a];
+        str += tempA;        
+    }
+
+    console.log(`The decrypted message is: ${str}`);
     
 }
-imitationGame([
-    'zzHe',
-    'ChangeAll|z|l',
-    'Insert|2|o',
+
+imitationGame(['owyouh',
+    'Move|2',
     'Move|3',
-    'Decode',
-  ]
-  )
+    'Insert|3|are',
+    'Insert|9|?',
+    'Decode'
+]  )
