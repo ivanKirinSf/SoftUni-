@@ -1,66 +1,54 @@
 function imitationGame(input){
 
     let message = input.shift();
-    let arr = message.split(""); 
-    let str = "";
+    let arr = message.split("");
+    let newArr = "";
     //console.log(arr)
-
     
-
     for(let i = 0; i<input.length; i++){
         let temp = input[i].split("|");
         let command = temp.shift();
-        
 
-        if(command === "ChangeAll"){
+        if(command === "Move"){
+            let num = Number(temp.shift());
 
-            let substring = temp.shift();          
+            index = 0;
+            while(index < num){
 
-            let replacement = temp;
+                let char = arr.shift();
+                arr.push(char);
 
-            for(let k = 0; k<arr.length ; k++){
-                let tempChar = arr[k];
-                //console.log(tempChar)
-                if(tempChar === substring){
-                    arr.splice(k, 1, replacement)
-                }
+                index++;
+
             }
-
-            //console.log(replacement);
-
-            //console.log(value)
-
-            //console.log(num)
-            
+            //console.log(num);
         }else if(command === "Insert"){
             let index = Number(temp.shift());
-            let value = temp.shift().split("");
-            
-            console.log(value);
+            let value = temp.shift().split("")
 
-            if(index >= 0 || index <= message.length-1){
+            if(index >= 0 || index < arr.length){
 
                 for(let char of value){
-                    arr.splice(index,0, char);
-                    index += 1;
+
+                    arr.splice(index, 0, char);
+                    index++;
+
                 }
-                
+
             }
-            
-            //console.log(value)
-        }else if(command === "Move"){
-            let firstN = Number(temp);
+           //console.log(value)
+        }else if(command === "ChangeAll"){
+            let substring = temp.shift();
+            let replacement = temp.shift();
 
-            //let firstChar = arr.splice(0, firstN);
+            for(let c = 0; c < arr.length; c++){
+                let tempChar = arr[c];
 
-            for(let f = 0; f<firstN; f++){
-                let tempF = arr.shift();
-                arr.push(tempF)
-            }
-
-
-            //console.log(firstChar)
-        }else if(command === "Decode"){           
+                if(tempChar === substring){
+                    arr.splice(c, 1, replacement)
+                }
+            }            
+        }else if(command === "Decode"){
 
             break;
 
@@ -68,19 +56,20 @@ function imitationGame(input){
         
     }
 
-    for(let a = 0; a < arr.length; a++){
-        let tempA = arr[a];
-        str += tempA;        
+    for(let el of arr){
+        newArr += el
     }
 
-    console.log(`The decrypted message is: ${str}`);
-    
+    console.log(`The decrypted message is: ${newArr}`)
+
 }
 
-imitationGame(['owyouh',
+imitationGame([
+    'owyouh',
     'Move|2',
     'Move|3',
     'Insert|3|are',
     'Insert|9|?',
     'Decode'
-]  )
+  ]
+  )
