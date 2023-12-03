@@ -12,11 +12,21 @@ function secretChat(input){
         if(command === "InsertSpace"){
             let index = Number(temp.shift());
             let space = " ";
+            let isCorrect = false;
 
-            if(index >= 0 || index < arr.length)
-            arr.splice(index, 0, space);
+            if(index >= 0 || index < arr.length){
+                isCorrect = true;
+                arr.splice(index, 0, space);
 
-            console.log(arr.join(""));
+            }
+            
+
+            if(isCorrect === true){
+
+                console.log(arr.join(""));
+
+            }
+            
 
 
         }else if(command === "Reverse"){
@@ -45,40 +55,61 @@ function secretChat(input){
                         }
     
                         if(isEqual === true){
-                            let reverseStop = true;
+                            reverseStop = true;
                             let reversed = substring.reverse();
                             arr.splice(indexR, reversed.length);
     
                             for(let a = 0; a<reversed.length; a++){                            
                                 arr.push(reversed[a])
                             }
+
+                            break;
             }
-            }               
+
+            else if(reverseStop === true){
+                console.log(arr.join(""))
+            }
+            }           
+            
                 
             }
+
+            
             //console.log(substring)
              
+        }  
+        
+        if(reverseStop === false){
+
+            console.log(`error`)
+
         }
 
-        console.log(arr.join(""));
+        
 
     }else if(command === "ChangeAll"){
 
         let substringC = temp.shift();
         let replacementC = temp.shift();
+        let isCorrect = false;
 
         for(let b = 0; b < arr.length; b++){
             
             if(arr[b] === substringC){
+                isCorrect = true;
                 arr.splice(b, 1, replacementC)
             }
         }
-        console.log(arr.join(""))
+
+        if(isCorrect === true){
+            console.log(arr.join(""))
+        }
+        
     }else if(command === "Reveal"){
 
         console.log(`You have a new text message: ${arr.join("")}`);
 
-        //break;
+        break;
 
     }
 
@@ -88,11 +119,12 @@ function secretChat(input){
 }
 
 secretChat([
-    'heVVodar!gniV',
-    'ChangeAll:|:V:|:l',
-    'Reverse:|:!gnil',
-    'InsertSpace:|:5',
-    'Reveal'
-  ]
-  
+    'Howare?uoy',
+    //'ChangeAll:|:i:|:o',
+    'Reverse:|:?uoy',
+    //'Reverse:|:jd',
+    //'InsertSpace:|:3',
+    //'InsertSpace:|:7',
+    //'Reveal'
+  ]     
   )
