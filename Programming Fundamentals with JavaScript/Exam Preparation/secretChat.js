@@ -65,15 +65,10 @@ function secretChat(input){
 
                             break;
             }
-
-            else if(reverseStop === true){
-                console.log(arr.join(""))
-            }
-            }           
             
+            }                 
                 
             }
-
             
             //console.log(substring)
              
@@ -83,6 +78,8 @@ function secretChat(input){
 
             console.log(`error`)
 
+        }else if(reverseStop === true){
+            console.log(arr.join(""))
         }
 
         
@@ -119,12 +116,10 @@ function secretChat(input){
 }
 
 secretChat([
-    'Howare?uoy',
-    //'ChangeAll:|:i:|:o',
-    'Reverse:|:?uoy',
-    //'Reverse:|:jd',
-    //'InsertSpace:|:3',
-    //'InsertSpace:|:7',
-    //'Reveal'
-  ]     
+    'heVVodar!gniV',
+    'ChangeAll:|:V:|:l',
+    'Reverse:|:!gnil',
+    'InsertSpace:|:5',
+    'Reveal'
+  ]      
   )
