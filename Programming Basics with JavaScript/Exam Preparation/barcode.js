@@ -12,97 +12,98 @@ function barcode(input){
 
     let index3 = "";
 
+    //let index3 = "";
+
     let code = "";
 
     let final = "";
 
-    for(let a = start[0]; a<=end[0]; a++){
-        let temp = a;
+    //let final = "";
 
-        if(temp % 2 !== 0){
+   for(let a = start[0]; a <= end[0]; a++){
+    let temp = a;
 
-            index0 += temp;
-
-        }
-        
-
+    if(temp % 2 !== 0){
+        index0 += a; 
     }
+    
+    
+   }
 
-    for(let b = start[1]; b<=end[1]; b++){
-        let temp = b;
+   for(let b = start[1]; b <= end[1]; b++){
+    let temp = b;
 
-        if(temp % 2 !== 0){
-
-            index1 += temp;
-
-        }
-        
-
+    if(temp % 2 !== 0){
+        index1 += b; 
     }
+    
+   }
 
-    for(let c = start[2]; c<=end[2]; c++){
-        let temp = c;
+   for(let c = start[2]; c <= end[2]; c++){
+    let temp = c;
 
-        if(temp % 2 !== 0){
-
-            index2 += temp;
-
-        }        
-
+    if(temp % 2 !== 0){
+        index2 += c; 
     }
+    
+   }
 
-    for(let d = start[3]; d<=end[3]; d++){
-        let temp = d;
+   for(let d = start[3]; d <= end[3]; d++){
+    let temp = d;
 
-        if(temp % 2 !== 0){
-
-            index3 += temp;
-
-        }        
-
+    if(temp % 2 !== 0){
+        index3 += d; 
     }
+    
+   }
 
-    for(let e = 0; e < index0.length; e++){
-        let tempE = index0[e];
+   //console.log(index0)
+   //console.log(index1)
 
-        code += tempE;
+   
+   
 
-        for(let f = 0; f < index1.length; f++){
-            let tempF = index1[f];
+   for(let i = 0; i < index0.length; i++){
 
-            code  += tempF;
+    let tempI = index0[i];
 
-            for(let j = 0; j < index2.length; j++){
-                let tempJ = index2[j];
+    //code += tempI;
+
+    for(let j = 0; j < index1.length; j++){
+        let tempJ = index1[j];
+
+        //code += tempJ;
+
+        for(let k = 0; k < index2.length; k++){
+            let tempK = index2[k];
+
+            for(let l = 0; l <index3.length; l++){
+
+                let tempL = index3[l];
+                
+
+                code += tempI;
+
                 code += tempJ;
+        
+                code += tempK;
 
-                for(let h = 0; h < index3.length; h++){
-                    let tempH = index3[h];
-                    code += tempH;
+                code += tempL;
 
-                    final += code;
-                    code = "";
+                final += code + " ";
+        
+                //console.log(code)
+        
+                code = "";
 
-                    if(code.length === 0){
-                        break;
-                    }
-                }
-
-                if(code.length === 0){
-                    break;
-                }
             }
-
-            if(code.length === 0){
-                break;
-            }
-
-            if(code.length === 0){
-                break;
-            }
+        
         }
+        
     }
 
-    }
+   }
 
-barcode(["2345", "6789"])
+   console.log(final)
+      
+}
