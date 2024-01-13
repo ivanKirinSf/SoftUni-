@@ -1,6 +1,6 @@
 function smallestTwoNumbers(arr){
 
-    let sortInAscending = arr.sort();
+    let sortInAscending = arr.sort((a,b) => a-b);
 
     let smallestTwo = smallests(sortInAscending);
 
@@ -26,4 +26,4 @@ function smallestTwoNumbers(arr){
 
 }
 
-smallestTwoNumbers([30, 15, 50, 5])
+smallestTwoNumbers([3, 0, 10, 4, 7, 3])
