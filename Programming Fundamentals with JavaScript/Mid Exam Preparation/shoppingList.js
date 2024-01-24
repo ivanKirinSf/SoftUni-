@@ -3,15 +3,16 @@ function shoppingList(input){
     let list = input.shift().split("!");
 
     for(let i = 0; i<input.length; i++){
-        let temp = input[i];
+        let temp = input[i].split(" ");
 
-        if(temp === "Go Shopping!"){
-            break;
-        }else {
+        //if(temp[0] === "Go"){
 
-            temp = input[i].split(" ")
+            //let second = temp[1];
 
-        }
+            //if(second === "Shopping!"){
+                //break;
+            //}            
+        //}
 
         let command = temp.shift();
         
@@ -49,33 +50,62 @@ function shoppingList(input){
 
                 if(indexCorrect !== -1){
 
-                    list.splice(indexCorrect,1);
+                    list.splice(indexCorrect,1, newItem);
 
-                    list.splice(indexCorrect, 0, newItem)
+                    //list.splice(indexCorrect, 0, newItem)
 
                 }
                 break;
 
+                case "Rearrange":
+                    let itemRearrange = temp.shift();
+                    let indexRearrange = list.indexOf(itemRearrange);
 
+                    if(indexRearrange !== -1){
 
-                console.log(newItem)
+                        let product = list[indexRearrange]
+
+                        list.splice(indexRearrange, 1);
+
+                        list.push(product)
+
+                    }                  
+
+                    break;
+
+                    case "Go":
+                        let second = temp.shift();
+
+                        if(second === "Shopping!"){
+                            
+                            console.log(list.join(", "))
+
+                            
+                        }
+
+                        break;                                    
+
+                
 
             //console.log(index)
         }
 
+        
+
         //console.log(command)
     }
 
-    console.log(list)
-
-
+    
 
 }
 
 shoppingList([
-"Tomatoes!Potatoes!Bread",
-//"Unnecessary Potatoes",
-"Correct Potatoes Onion",
-//"Urgent Tomatoes",
-//"Go Shopping!"
+"Milk!Pepper!Salt!Water!Banana",
+"Urgent Salt",
+"Unnecessary Grapes",
+"Correct Pepper Onion",
+"Rearrange Grapes",
+"Correct Tomatoes Potatoes",
+"Go Shopping!"
 ])
+
