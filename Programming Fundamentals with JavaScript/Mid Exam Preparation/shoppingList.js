@@ -1,73 +1,77 @@
+function movingTarget(input){
 
-function shoppingList(input){
+    let targets = input.shift().split(" ").map(Number);
 
-    let list = input.shift().split("!");
+    let commands = input
 
-    let commands = input;
+    for(let i = 0; i< commands.length; i++){
+        
+        let temp = commands[i].split(" ");
 
-    //console.log(commands)
+        let command = temp.shift();
 
-    for(let i = 0; i<commands.length; i++){
-        let temp = commands[i];
+        if(command === "Shoot"){
 
-        if(temp === "Go Shopping!"){
-            console.log(list.join(", "));
-        }
+            let index = Number(temp.shift());
 
-       let text = temp.split(" ")
+            let value = Number(temp.shift());
 
-        //let command = temp.shift();
+            if(index < targets.length && index >= 0){
 
-       let command = text.shift();
+               let res = targets[index] - value;
 
-       if(command === "Urgent"){
+               if(res <= 0){
+                targets.splice(index,1)
+               }else {
 
-        let item = text.shift();
+                targets[index] = res
 
-        let index = list.indexOf(item);
+               }      
 
-        if(index === -1){
+            }
 
-            list.unshift(item);
-        }
+            //console.log(value)
 
-       } else if(command === "Unnecessary"){
-        let item = text.shift();
+        }else if(command === "Add"){
 
-        let index = list.indexOf(item);
+            let index = Number(temp.shift());
+            let value = Number(temp.shift());
 
-        if(index !== -1){
+            if(index >= 0 && index < targets.length){
+                //targets[index] = value
+                targets.splice(index, 1, value)
+            }else{
+                console.log("Invalid placement!")
+            }
 
-            list.splice(index, 1)
+            //console.log(value)          
 
-        }
-
-       }else if(command === "Correct"){
-        let oldItem = text.shift();
-        let newItem = text.shift();
-
-        let index = list.indexOf(oldItem);
-
-        if(index !== -1){
-
-            list[index] = newItem;
+        }else if(command === "Strike"){
+            let index = Number(temp.shift());
+            let radius = Number(temp.shift());
+            let range = radius*2+1;
             
+            if(index - radius >= 0 && index + radius < targets.length){
+
+                targets.splice(index-radius, range)
+
+            }else {
+
+                console.log("Strike missed!")
+
+            }
+
+        }if(command === "End"){
+
+            console.log(targets.join("|"))
+
         }
-    }else if(command === "Rearrange"){
-        let item = text.shift();
 
-        let index = list.indexOf(item);
+        //console.log(temp)
 
-        if(index !== -1){
-
-            list.splice(index, 1);
-
-            list.push(item);
-
-        }
-    }
     }
 
+    //console.log(targets)
 }
 
 shoppingList([
