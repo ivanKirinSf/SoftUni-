@@ -1,83 +1,72 @@
-function movingTarget(input){
+function movingTargets(input){
 
     let targets = input.shift().split(" ").map(Number);
 
-    let commands = input
+    let commands = input;
 
-    for(let i = 0; i< commands.length; i++){
-        
+    for(let i = 0 ; i<commands.length; i++){
+
         let temp = commands[i].split(" ");
 
         let command = temp.shift();
 
         if(command === "Shoot"){
 
-            let index = Number(temp.shift());
+            let indexShoot = Number(temp.shift());
 
-            let value = Number(temp.shift());
+            let powerShoot = Number(temp.shift());
 
-            if(index < targets.length && index >= 0){
+            if(indexShoot < targets.length && indexShoot >= 0){
 
-               let res = targets[index] - value;
+                let res = targets[indexShoot] - powerShoot;
 
-               if(res <= 0){
-                targets.splice(index,1)
-               }else {
+                if(res > 0){
 
-                targets[index] = res
+                    targets.splice(indexShoot, 1, res)
 
-               }      
+                }else{
+                    targets.splice(indexShoot, 1)
+                }
 
             }
-
-            //console.log(value)
-
         }else if(command === "Add"){
 
-            let index = Number(temp.shift());
-            let value = Number(temp.shift());
+            let indexAdd = Number(temp.shift());
+            let valueAdd = Number(temp.shift());
 
-            if(index >= 0 && index < targets.length){
-                //targets[index] = value
-                targets.splice(index, 1, value)
+            if(indexAdd >= 0 && indexAdd < targets.length){
+
+                targets.splice(indexAdd, 0, valueAdd)
+
             }else{
                 console.log("Invalid placement!")
             }
+        }else if( command === "Strike"){
 
-            //console.log(value)          
+            let indexStrike = Number(temp.shift());
+            let radiusStrike = Number(temp.shift());
 
-        }else if(command === "Strike"){
-            let index = Number(temp.shift());
-            let radius = Number(temp.shift());
-            let range = radius*2+1;
-            
-            if(index - radius >= 0 && index + radius < targets.length){
+            if(indexStrike - radiusStrike >= 0 && indexStrike + radiusStrike < targets.length){
 
-                targets.splice(index-radius, range)
+                targets.splice((indexStrike-radiusStrike), (radiusStrike*2 + 1))
 
             }else {
-
                 console.log("Strike missed!")
-
             }
 
-        }if(command === "End"){
+        }else if(command === "End"){
 
             console.log(targets.join("|"))
 
         }
-
-        //console.log(temp)
-
     }
 
-    //console.log(targets)
+    //console.log(commands)
 }
 
-shoppingList([
-"Tomatoes!Potatoes!Bread",
-"Unnecessary Milk",
-"Urgent Tomatoes",
-"Go Shopping!"
+movingTargets([
+"1 2 3 4 5",
+"Strike 0 1",
+"End"
 ])
 
