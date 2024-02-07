@@ -1,35 +1,79 @@
 function movingTarget(input){
 
-    let targets = input.shift().split(" ").map(Number);
+    let targets = input.shift().split(" ").map(Number)
 
-    let commands = input
+    //console.log(targets)
 
-    for(let i = 0; i< commands.length; i++){
+    for(let i = 0; i< input.length; i++){
         
-        let temp = commands[i].split(" ");
+        let temp = input[i].split(" ");
 
         let command = temp.shift();
 
         if(command === "Shoot"){
 
             let index = Number(temp.shift());
+            let power = Number(temp.shift());
+
+            if(index >= 0 && index < targets.length){
+
+                let res = targets[index] - power;
+
+            if(res > 0){
+                
+                targets.splice(index, 1, res)
+            }else{
+                targets.splice(index,1)
+            }
+
+            }
+            
+
+        }else if(command === "Add"){
+
+            let index = Number(temp.shift());
 
             let value = Number(temp.shift());
 
-            if(index < targets.length && index >= 0){
+            if(index >= 0 && index < targets.length){
 
-               let res = targets[index] - value;
+                targets.splice(index, 0, value)              
 
-               if(res <= 0){
-                targets.splice(index,1)
-               }else {
-
-                targets[index] = res
-
-               }      
-
-            }else if(command === "Add"){
-
-                
-
+            }else {
+                console.log("Invalid placement!")
             }
+
+        }else if(command === "Strike"){
+            let index = Number(temp.shift());
+            let radius = Number(temp.shift());
+
+            if(index - radius >= 0 && index + radius < targets.length){
+                targets.splice((index - radius), (radius*2 + 1))
+            }else {
+
+                console.log("Strike missed!")
+            }
+
+        }else if(command === "End"){
+
+            console.log(targets.join("|"));
+            break
+
+        }
+
+
+
+        //console.log(command)
+
+
+    }
+
+    //console.log(targets)
+
+}
+
+movingTarget([
+"1 2 3 4 5",
+"Strike 0 1",
+"End"
+])
