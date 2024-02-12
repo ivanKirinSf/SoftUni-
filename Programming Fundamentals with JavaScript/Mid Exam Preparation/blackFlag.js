@@ -1,51 +1,48 @@
 function blackFlag(input){
 
     let days = Number(input.shift());
-    let plunderPerDay = Number(input.shift());
-    let expetedPlunder = Number(input.shift());
-    let sum = 0;
 
-    //console.log(expetedPlunder)
+    let dailyPlunder = Number(input.shift());
 
-    for(let i = 1; i<=days; i++){
+    let expectedPlunder = Number(input.shift());
 
-        if(i % 3 === 0){
+    let totalPlunder = 0;
 
-            let additionalPlunder = plunderPerDay*0.5;
-            sum += plunderPerDay + additionalPlunder;
+    for(let i = 1 ; i <= days; i++){
+        let day = i;
 
-        }else if( i % 5 === 0 ){
+        totalPlunder += dailyPlunder;
 
-            let lose = sum*0.3;
-            
-            sum -= lose;
+        if(day % 3 === 0){
 
-        }else{
-
-            sum += plunderPerDay;
+            totalPlunder += dailyPlunder*0.5;
 
         }
-        
+
+        if(day % 5 === 0){
+            totalPlunder = totalPlunder*0.7
+        }
+    
+    }
+    
+    if(expectedPlunder <= totalPlunder){
+
+        console.log(`Ahoy! ${totalPlunder.toFixed(2)} plunder gained.`)
+
+    }else {
+
+        let value = totalPlunder/expectedPlunder*100
+
+        console.log(`Collected only ${value.toFixed(2)}% of the plunder.`)
+
     }
 
-    let percentage = (sum/expetedPlunder)*100;
-
-    if(sum >= expetedPlunder){
-        
-        console.log(`Ahoy! ${sum} plunder gained.`)
-
-    }else if(sum < expetedPlunder){
-
-
-        
-        console.log(`Collected only ${percentage}% of the plunder.`)
-
-    }
-
-    //console.log(sum)
+    //console.log(totalPlunder)
 
 }
 
-blackFlag(["5",
-"40",
-"100"])
+blackFlag([
+"10",
+"20",
+"380"
+])
