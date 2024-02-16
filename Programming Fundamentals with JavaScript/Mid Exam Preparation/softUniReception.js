@@ -1,44 +1,44 @@
-function softUniReception (input){
+function softUniReception(input){
 
     let students = Number(input.pop());
 
-    let studentsPerHour = input.map(Number)//split(", ")
+    let studentsPerHour = input.map(Number);
 
-    let totalPerHour = 0
+    let totalStudentsPerHour = 0;
 
-    let res = 0;
+    let helpedStudentsCount = 0;
 
-    //console.log(studentsPerHour)
+    let hours = 0;
 
-    for(let i = 0; i < input.length; i++){
-        let temp = Number(input[i]);
+    let counter = 0;
 
-        if(temp >=1 && temp <= 100){
+    //console.log(totalStudentsPerHour)
 
-        totalPerHour += temp 
+    for(let i = 0; i < studentsPerHour.length; i++){
 
-        }else {
-            break;
+        let temp = Number(studentsPerHour[i]);
+
+        totalStudentsPerHour += temp;
+
+    }
+
+    //console.log(totalStudentsPerHour)
+
+    while(helpedStudentsCount < students){
+
+        helpedStudentsCount += totalStudentsPerHour;
+        hours += 1;
+        counter += 1;
+
+        if(counter === 3 && helpedStudentsCount < students){
+            hours +=1;
+            counter = 0;
         }
-        
+
     }
 
-
-    if(students >= 0 && students <= 10000 && totalPerHour > 0){
-
-    res = Math.ceil(students/totalPerHour)//.toFixed(2)))
-
-    if(res >= 3){
-
-        let index = Math.floor(res / 3);
-
-        //console.log(index)
-        res += index
-    }
-
-    //console.log(index)
-    console.log(`Time needed: ${Math.ceil(res)}h.`)
-
-    }     
+    console.log(`Time needed: ${hours}h.`)
 
 }
+
+softUniReception(['6','6','6','45'])
