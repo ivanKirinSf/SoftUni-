@@ -1,46 +1,38 @@
 function storeProvision(arr1, arr2){
 
-    let num = arr1.length;
+    let product = {};
 
-    let provision = [];
-
-
-    for(let i = 0; i < num; i+=2){
-
-        let product1 = arr1[i];
-        let product2 = arr2[i];
-
-        let index = arr1.indexOf(product2);
-
-        if(index !== -1){
-            let res = Number(arr2[i+1]) + Number(arr1[index+1]);
-
-            res = "" + res
-
-            arr1.splice((index+1), 1, res)
-
-        }else if(index === -1){
-
-            arr1.push(product2);
-            arr1.push(arr2[i+1]);
-
-        }
-
+    for(let i = 0 ; i < arr1.length; i+=2){
+        let name = arr1[i];
+        let num = Number(arr1[i+1]);
+        product[name] = num;
     }
 
-    for(let k = 0; k < arr1.length; k+=2){
+    for(let k = 0; k < arr2.length; k+=2){
+        
+        let name = arr2[k];
+        let num = Number(arr2[k+1]);
 
-        let temp = arr1[k];
+        if(product.hasOwnProperty(name)){
 
-        provision.product = temp;
-        provision.quantity = arr1[k+1];
+            let res = num + product[name];
+            product[name] = res;
 
-        console.log(`${provision[`product`]} -> ${provision[`quantity`]}`)
+        }else{
 
-    }   
+            product[name] = num;
+
+        }
+    }
+
+    //console.table(product)
+
+    for(let el of Object.keys(product)){
+
+        console.log(`${el} -> ${product[el]}`)
+    }
 
 }
-
   
 
 // push two arrays into third array(or modify the first one)
