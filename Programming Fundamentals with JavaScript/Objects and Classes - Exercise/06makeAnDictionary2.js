@@ -1,40 +1,19 @@
-function makeADictionary(input){
+function makeADictionary(info){
 
-    let parsed = {};
+    let dictionary = {}
 
-    let dictionary = [];
-
-    for(let i = 0; i < input.length; i++){
-       
-        let temp = input[i];
-
-        parsed = JSON.parse(temp);
-
-        dictionary.push(parsed)
-
-        for(let [key, value] of Object.entries(parsed)){
-
-            let term = key;
-            let def = value;
-
-            let isExist = dictionary.findIndex(k => k.key === term){
-
-                if(isExist !== -1){
-                    dictionary[isExist][key] = def;
-                }
-
-            }
-
-            //console.log(term);
-            //console.log(value);
-
-        }
-
-        //console.log(parsed);
-
+    for(let i = 0; i < info.length; i++){
+        
+        let tempObj = JSON.parse(info[i]);
+        let keys = Object.keys(tempObj);
+        let key = keys.shift();
+        dictionary[key] = tempObj[key];
+        //console.log(tempObj[key]);
     }
 
-    //console.log(dictionary[0]);
+    let sort = dictionary.sort((a,b) => a[key].localeCompare(b[key]));
+
+    console.log(sort)
 
 }
 
