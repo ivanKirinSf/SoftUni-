@@ -1,30 +1,29 @@
-class Storage{
+class Storage {
 
-    constructor(capacity){
+constructor(capacity){
 
-        this.products = [];
-        this.capacity = capacity;
-        
+    this.capacity = capacity;
+    this.storage = [];
+    this.totalCost = 0;
 
-    }
+}
 
-    addProduct(product){
+addProduct(product){
 
-        this.products.push(product);
-        this.capacity = this.capacity - this.products.quantity;
-        this.totalCost += this.products.price * this.products.quantity;
+    this.storage.push(product);
+    this.capacity -= product.quantity;
+    this.totalCost += product.quantity*product.price;
+    
+}
 
-    }
+getProducts(){
 
-    getProducts(){
+    let text = this.storage.map(product=> JSON.stringify(product));
 
-        for(let el of this.products){
-            let text = JSON.stringify(el);
+    return text.join(`\n`)
 
-            console.log(text)
-        }
+}
 
-    }
 }
 
 let productOne = {name: 'Cucamber', price: 1.50, quantity: 15};
