@@ -1,11 +1,10 @@
-function pirates(input) {
+function pirates(input){
 
     let city = {};
 
     let arr = [];
 
     for(let i = 0; i < input.length; i++){
-
         let temp = input[i];
 
         if(temp === "Sail"){
@@ -32,121 +31,112 @@ function pirates(input) {
 
         if(index !== -1){
 
+            arr[index].gold += gold;
             arr[index].people += people;
 
-            arr[index].gold += gold;
-
         }else{
+            arr.push(city)
 
-            arr.push(city);
-
-        }       
-
-        city = {};  
-
-       //console.log(name)
-    } 
+            city = {};
+        }
+        //console.log(arr)
+    }
 
     for(let j = 0; j < input.length; j++){
 
-        let temp = input[j];
+        let temp = input[j].split("=>");
 
-        if(temp === "End"){
-            
-            if(arr.length > 0){
-
-                console.log(`Ahoy, Captain! There are ${arr.length} wealthy settlements to go to:`)
-
-                for(let el of arr){
-
-                    console.log(`${el.name} -> Population: ${el.people} citizens, Gold: ${el.gold} kg`)
-
-                }
-            }else if(arr.length === 0){
-
-                console.log(`Ahoy, Captain! All targets have been plundered and destroyed!`);
-
-            }
-        }
-
-        let commands = temp.split("=>");
-
-        let command = commands.shift();
+        let command = temp.shift();
 
         if(command === "Plunder"){
 
-            let cityName = commands.shift();
+            let cityName = temp.shift();
 
-            let killedPeople = Number(commands.shift());
+            let killedPeople = Number(temp.shift());
 
-            let takenGold = Number(commands.shift());
+            let stolenGold = Number(temp.shift());
 
-            //console.log(`${cityName} plundered! ${takenGold} gold stolen, ${killedPeople} citizens killed.`);
+            let res = arr.find(a => a.name === cityName)
+
+            let indexRes = arr.indexOf(res);   
             
-            let res = arr.find(a => a.name === cityName);
+            arr[indexRes].people -= killedPeople;
 
-            let index = arr.indexOf(res);
+            arr[indexRes].gold -= stolenGold;
 
-            arr[index].people -= killedPeople;
+            console.log(`${cityName} plundered! ${stolenGold} gold stolen, ${killedPeople} citizens killed.`)
 
-            arr[index].gold -= takenGold;
+            if(arr[indexRes].people <= 0 || arr[indexRes].gold <= 0){
 
-            console.log(`${cityName} plundered! ${takenGold} gold stolen, ${killedPeople} citizens killed.`);
-
-            if(arr[index].people <= 0 || arr[index].gold <= 0){
-
-                arr.splice(index, 1);
+                arr.splice(indexRes, 1);
 
                 console.log(`${cityName} has been wiped off the map!`);
-                continue; 
+
             }
+            
 
         }else if(command === "Prosper"){
 
-            let cityName = commands.shift();
+            let townName = temp.shift();
 
-            let cityGold = Number(commands.shift());
+            let townGold = Number(temp.shift());
 
-            let res = arr.find(e => e.name === cityName);
+            let res = arr.find(b => b.name === townName);
 
-            let index = arr.indexOf(res);   
-            
-            if(cityGold < 0){
-                console.log(`Gold added cannot be a negative number!`);
-                continue;
-            }else{
+            let indexRes = arr.indexOf(res);
 
-                arr[index].gold += cityGold;
+            if(indexRes !== -1){
 
-                console.log(`${cityGold} gold added to the city treasury. ${cityName} now has ${arr[index].gold} gold.`);
+                if(townGold < 0){
 
-            }        
+                    console.log(`Gold added cannot be a negative number!`);
 
-                   
+                }else if(townGold >= 0){
+
+                    arr[indexRes].gold += townGold;
+
+                    console.log(`${townGold} gold added to the city treasury. ${townName} now has ${arr[indexRes].gold} gold.`)
+
+                }                
+
+            }
+
+        }else if(command === "End"){
+
+            if(arr.length > 0){
+                console.log(`Ahoy, Captain! There are ${arr.length} wealthy settlements to go to:`);
+
+                for(let el of arr){
+
+                console.log(`${el.name} -> Population: ${el.people} citizens, Gold: ${el.gold} kg`)
+
+                }
+            }else if(arr.length <= 0){
+
+               console.log(`Ahoy, Captain! All targets have been plundered and destroyed!`) 
+            }
 
         }
 
-        //console.log(commands)
+        //console.log(command);
+
+
+        
+
     }
 
     //console.table(arr)
 
-        }   
 
+
+}
 
 pirates([
-
-"Nassau||95000||1000",
-"San Juan||930000||1250",
-"Campeche||270000||690",
-"Port Royal||320000||1000",
-"Port Royal||100000||2000",
+"Tortuga||345000||1250",
+"Santo Domingo||240000||630",
+"Havana||410000||1100",
 "Sail",
-"Prosper=>Port Royal=>-200",
-"Plunder=>Nassau=>94000=>750",
-"Plunder=>Nassau=>1000=>150",
-"Plunder=>Campeche=>150000=>690",
+"Plunder=>Tortuga=>75000=>380",
+"Prosper=>Santo Domingo=>180",
 "End"
-
 ])
-
