@@ -1,48 +1,38 @@
 function minerTask(input){
 
-    let new Map = {};
+    let list = {};
 
-    //let resource = "";
-
-    for( let i = 0; i < input.length; i++ ){
+    for(let i = 0; i < input.length; i++){
 
         if(i % 2 === 0){
 
-        let resource = "";
+            let resource = input[i];
 
-        let quantity = 0; 
-        
-        let finalQuantity = 0;
+            let quantity = Number(input[i+1]);
 
-           resource = input[i];
+            if(list.hasOwnProperty(resource)){
 
-           if(map.has(resource)){
+                list[resource] += quantity;
 
-            let currentQuantity = resources.get(resource);
+            }else{
 
-            quantity = Number(input[i+1]);
+                list[resource] = quantity;
 
-            resources[resource] = currentQuantity + quantity;
+            }
 
-           }else {
-
-           quantity = Number(input[i+1]);
-
-           resources[resource] = finalQuantity + quantity;
-
-           }                   
-           
         }
         
     }
 
-    for(let key in resources){
+    let entries = Object.entries(list);
 
-        console.log(`${key} -> ${resources[key]}`)
+    for(let el of entries){
+
+        console.log(`${el[0]} -> ${el[1]}`)
     }
 
-    //console.table(resources)
-
+    //console.table(`${entries[0]} -> ${entries[1]}`)
+    //console.table(`${entries[0]} -> ${entries[1]}`)
 }
 
 minerTask([
