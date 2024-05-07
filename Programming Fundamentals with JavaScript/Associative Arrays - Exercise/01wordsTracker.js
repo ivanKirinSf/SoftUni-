@@ -1,41 +1,43 @@
 function wordsTracker(input){
 
-    let res = {};
+  let words = input.shift().split(" ");
 
-    let words = input.shift().split(" ");
+  let list = {};
 
-    let str = input//.split(" ");
+  for(let word of words){
 
-    for(let word of words){
+    let el = word;
 
-        for(let i = 0; i< str.length; i++){
+    list[el] = 0;
 
-            let temp = str[i];
+       for(let i = 0; i< input.length; i++){
 
-            if(temp === word){
+            let temp = input[i];
 
-                res.word = word;
+            if(word === temp){
 
-                if(res[word] > 1){
+                list[el] += 1              
 
-                    res[word] += 1;
-                }else{
-
-                    res[word] = 1;
-
-                }                
             }
-        }
+       }
+  }
 
-    }
+  let sorted = Object.entries(list)
 
-    
+  sorted.sorted((a,b) => a[key] - b[key])
 
-    //console.log(str);
+  //console.table(sorted)
+
+  for(let item in sorted){
+
+    //let entries = Object.entries(item)
+
+    console.log(`${item} - ${sorted[item]}`)
+
+  }
 
 }
 
 wordsTracker([
-    'this sentence', 
-    'In', 'this', 'sentence', 'you', 'have', 'to', 'count', 'the', 'occurrences', 'of', 'the', 'words', 'this', 'and', 'sentence', 'because', 'this', 'is', 'your', 'task'
-    ])
+    'is the', 
+    'first', 'sentence', 'Here', 'is', 'another', 'the', 'And', 'finally', 'the', 'the', 'sentence'])
