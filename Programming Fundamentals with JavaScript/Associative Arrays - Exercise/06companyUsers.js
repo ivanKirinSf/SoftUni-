@@ -2,53 +2,56 @@ function companyUsers(input){
 
     let corpList = {};
 
-   for(let el of input){
+    for(let info of input){
 
-         let info = el.split(" -> ");
+        let compInfo = info.split(" -> ");
 
-         let firm = info.shift();
+        let firm = compInfo.shift();
 
-         let personId = info.shift();
+        let personId = compInfo.shift();
 
-         if(firm in corpList){
+        if(corpList.hasOwnProperty(firm)){
 
             if(!corpList[firm].includes(personId)){
 
-                 corpList[firm].push(personId);
+                corpList[firm].push(personId);
 
             }
 
-         }else{
 
-             corpList[firm] = [personId];
+        }else{
 
-         }
+            corpList[firm] = [personId];
 
-         //console.log(corpList);
+        }     
 
-   }
-
-   let entries = Object.entries(corpList).sort((a, b) => a[0].localeCompare(b[0]));
-
-   //console.table(entries);
-
-   for(let [firm, arrId] of entries) {
-
-    console.log(firm);
-
-    for(let empId of arrId){
-
-        console.log(`-- ${empId}`);
+        //console.log(personId)       
 
     }
-   }
 
-   //console.table(sorted);
+    let entries = Object.entries(corpList);
+
+    let sorted = entries.sort((a,b) => a[0].localeCompare(b[0]));
+
+    for(let el of sorted){
+
+       console.log(el[0]);
+
+       for(let temp of el[1]){
+
+        console.log(`-- ${temp}`)
+
+       }
+    }
+    
+    //console.table(sorted)
+
+    //console.table(corpList)  
 
 }
 
 companyUsers([
-    'SoftUni -> AA12345',    
+    'SoftUni -> AA12345',
     'SoftUni -> CC12344',
     'Lenovo -> XX23456',
     'SoftUni -> AA12345',
