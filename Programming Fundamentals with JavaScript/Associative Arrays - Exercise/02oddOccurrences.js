@@ -1,50 +1,33 @@
-function oddOccurrences(input){
+function oddOccurrences(words){
 
-    let obj = {};
+    let resultObject = {};
 
-    let list = input.shift().split(" ");
+    let allWords = words.split(" ").map(w => w.toLowerCase());
+    let allWordsLength = allWords.length;
 
-    let lowerC = list.map(e => e.toLowerCase());
-
-    //console.log(lowerC)
-
-    for(let el of lowerC){
-
-        let str = el;
-
-        if(!obj.hasOwnProperty(str)){
-
-            obj[str] = 1;
-
-        }else{
-
-            obj[str] += 1;
-
+    for(let i = 0; i < allWordsLength; i++){
+        if(!resultObject.hasOwnProperty(allWords[i])){
+            resultObject[allWords[i]] = [];
         }
 
-        
+        resultObject[allWords[i]].push(i);
     }
 
-    let entries = Object.entries(obj);
+    //console.table(resultObject)
 
-    let res = [];
+    let sorted = Object.entries(resultObject).sort((a,b) => a[1][0] - b[1][0]);
 
-    for(let item of entries){
+    console.table(sorted)
 
-        let quantity = Number(item[1]);
+    let result = " ";
 
-        if(quantity % 2 !== 0){
-
-            res.push(item[0])
-
+    for(let el of sorted){
+        if(el[1].length %2 !== 0){
+            result += `${el[0]} `;            
         }
-
-        //console.log(quantity)
     }
 
-    console.log(res.join(" "))
-
-
+    console.log(result)
 
 }
 
