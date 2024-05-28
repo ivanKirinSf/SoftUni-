@@ -1,62 +1,33 @@
 function piccolo(input){
 
-    let list = [];
+   let parking = {};
 
-   for(let el of input){
+   for(let item of input){
 
-    let temp = el.split(", ");
+    let commands = item.split(", ");
 
-    if(temp[0] === "IN"){
+    let [action, carNum] = commands;
 
-        list.push(temp[1])
+    if(action === "IN"){
 
-    } 
 
-    if(temp[0] === "OUT"){
+        parking[carNum] = 'parked';
 
-    let index = list.indexOf(temp[1]);
+    }else if(action === "OUT"){
 
-    if(index !== -1){
-
-       list.splice(index, 1)
-
+        parking[carNum] = 'out';
     }
 
-    }    
+    let sorted = parking.filter(el => el {
+        if(parking[carNum] === "parked" ){
+
+            return parking[carNum];
+        }
+    })
+
+    console.log(commands)
 
    }
-
-   let numbers = {};
-
-   for(let num of list){
-
-    let carNum = Number(num.slice(2, 6));
-
-    numbers[num] = carNum;
-
-    //console.log(carNum)
-
-   }
-
-   if(numbers.length > 0){
-
-    let entries = Object.entries(numbers);
-
-   let sorted = entries.sort((a,b) => a[1] - b[1]);
-
-   console.table(sorted)
-
-   for(let auto in sorted){
-
-    console.table(auto);
-
-   }
-
-   } else {
-
-    console.log("Parking Lot is Empty")    
-
-   }  
 
 }
 
@@ -64,5 +35,11 @@ piccolo([
 'IN, CA2844AA',
 'IN, CA1234TA',
 'OUT, CA2844AA',
-'OUT, CA1234TA'
+'IN, CA9999TT',
+'IN, CA2866HI',
+'OUT, CA1234TA',
+'IN, CA2844AA',
+'OUT, CA2866HI',
+'IN, CA9876HH',
+'IN, CA2822UU'
 ])
