@@ -1,45 +1,49 @@
-function piccolo(input){
+function piccolo(input) {
 
-   let parking = {};
+    let parking = {};
 
-   for(let item of input){
+    for (let el of input) {
 
-    let commands = item.split(", ");
+        let commnad = el.split(", ");
 
-    let [action, carNum] = commands;
+        //console.log(commnad);
+        let action = commnad[0];
 
-    if(action === "IN"){
+        let carNum = commnad[1];
 
+        //parking[carNum] = action;
 
-        parking[carNum] = 'parked';
+        //parking[carNum] = carNum;
 
-    }else if(action === "OUT"){
+        if(action === "IN"){
 
-        parking[carNum] = 'out';
+            parking[carNum] = "parked"
+
+        }else{
+
+            parking[carNum] = "OUT"
+
+        }
+        
     }
 
-    let sorted = parking.filter(el => el {
-        if(parking[carNum] === "parked" ){
+    console.table(parking);
 
-            return parking[carNum];
-        }
-    })
+    let sorted = Object.entries(parking).filter(([carNum, action] => action === "parked"));
 
-    console.log(commands)
-
-   }
+    console.log(sorted)
 
 }
 
 piccolo([
-'IN, CA2844AA',
-'IN, CA1234TA',
-'OUT, CA2844AA',
-'IN, CA9999TT',
-'IN, CA2866HI',
-'OUT, CA1234TA',
-'IN, CA2844AA',
-'OUT, CA2866HI',
-'IN, CA9876HH',
-'IN, CA2822UU'
+    'IN, CA2844AA',
+    'IN, CA1234TA',
+    'OUT, CA2844AA',
+    'IN, CA9999TT',
+    'IN, CA2866HI',
+    'OUT, CA1234TA',
+    'IN, CA2844AA',
+    'OUT, CA2866HI',
+    'IN, CA9876HH',
+    'IN, CA2822UU'
 ])
