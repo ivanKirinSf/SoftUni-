@@ -1,49 +1,62 @@
-function piccolo(input) {
+function picolo(input){
 
     let parking = {};
 
-    for (let el of input) {
+    for(let el of input){
 
-        let commnad = el.split(", ");
+        let temp = el.split(", ");
 
-        //console.log(commnad);
-        let action = commnad[0];
+        //console.log(temp);
 
-        let carNum = commnad[1];
+        let action = temp[0];
 
-        //parking[carNum] = action;
-
-        //parking[carNum] = carNum;
+        let carNum = temp[1];
 
         if(action === "IN"){
 
-            parking[carNum] = "parked"
+            parking[carNum] = "parked";
 
-        }else{
+        }else {
 
-            parking[carNum] = "OUT"
-
+            parking[carNum] = "out";
         }
-        
+
     }
 
-    console.table(parking);
+let sorted = Object.entries(parking).filter(([carNum, status]) => {
 
-    let sorted = Object.entries(parking).filter(([carNum, action] => action === "parked"));
+           if(status === "parked"){
 
-    console.log(sorted)
+              return carNum
 
+           }
+
+    }).map(el => el[0]).sort((a,b) => a.localeCompare(b));
+
+
+    if(sorted.length > 0){
+
+        for(let el of sorted){
+
+            console.log(el)
+    
+        }
+    }else {
+
+        console.log(`Parking Lot is Empty`)
+
+    }
 }
 
-piccolo([
-    'IN, CA2844AA',
-    'IN, CA1234TA',
-    'OUT, CA2844AA',
-    'IN, CA9999TT',
-    'IN, CA2866HI',
-    'OUT, CA1234TA',
-    'IN, CA2844AA',
-    'OUT, CA2866HI',
-    'IN, CA9876HH',
-    'IN, CA2822UU'
+picolo([
+'IN, CA2844AA',
+'IN, CA1234TA',
+'OUT, CA2844AA',
+'IN, CA9999TT',
+'IN, CA2866HI',
+'OUT, CA1234TA',
+'IN, CA2844AA',
+'OUT, CA2866HI',
+'IN, CA9876HH',
+'IN, CA2822UU'
 ])
