@@ -4,15 +4,19 @@ function cardGame(input) {
 
     let players = {};
 
+    let personValue = [];
+
+    let value = 0;
+
+    let person = "";
+
     for (let temp of input) {
 
         let data = temp.split(": ");
 
-        let person = data.shift();
+        person = data.shift();
 
         let cardsList = data.shift().split(", ");
-
-        let value = 0;
 
         for (let card of cardsList) {
 
@@ -24,64 +28,89 @@ function cardGame(input) {
 
             let power = "";
 
-            let powerCode = ""
+            let typeCode = "";
 
-            if (length === 1) {
-
-                power = card.shift();
-
-                powerCode = power.charCodeAt(0);
-
-            } else if (length === 2) {
+            if(length === 2) {
 
                 power = 10;
 
+            }else{
+
+                power = card.shift()
+
+                if(power === "J"){
+
+                   power = 11;
+
+                }else if(power === "Q"){
+
+                    power = 12;
+ 
+                 }else if(power === "K"){
+
+                    power = 13;
+ 
+                 }else if(power === "A"){
+
+                    power = 14;
+ 
+                 }else{
+
+                    power = Number(power);
+
+                 }
+            }  
+            
+            if(type === "S"){
+
+               type = 4;
+
+            }else if(type === "H"){
+
+                type = 3;
+
+            }else if(type === "D"){
+
+                type = 2;
+                
+            }else if(type === "C"){
+
+                type = 1;
+                
             }
 
+            let currentValue = type*power;
 
+            personValue.push(currentValue);           
 
-            if (powerCode === 74) {
+        }       
 
-                let tempValue = 11;
-
-                value += tempValue;
-
-            } else if (powerCode === 81) {
-
-                let tempValue = 12;
-
-                value += tempValue;
-
-            } else if (powerCode === 75) {
-
-                let tempValue = 13;
-
-                value += tempValue;
-
-            } else if (powerCode === 65) {
-
-                let tempValue = 14;
-
-                value += tempValue;
-            } else {
-
-                value += power;
-
-            }
-
-
-
-        }
+        //console.log(value)
         //console.log(cardsList)
-    }
+
+        for(let num of personValue){
+
+            value += num;
+    
+            players[person] = value;
+    
+        }
+    }    
+
+    console.table(players);
+
+    //let entries = Object.entries(players);
+
+
+
 }
 
 cardGame(
-    ['Peter: 10C, 4H, 9H, AS, QS',
-        //'Tomas: 3H, 10S, JC, KD, 5S, 10S',
-        //'Andrea: QH, QC, QS, QD',
-        //'Tomas: 6H, 7S, KC, KD, 5S, 10C',
-        //'Andrea: QH, QC, JS, JD, JC',
-        //'Peter: JD, JD, JD, JD, JD, JD'
+    ['Peter: 2C, 4H, 9H, AS, QS',
+    'Tomas: 3H',
+    'Andrea: QH',
+    'Tomas: 6H',
+    'Andrea: QH',
+    'Peter: JD'
     ]
 )
