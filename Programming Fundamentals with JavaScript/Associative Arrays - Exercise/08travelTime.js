@@ -1,14 +1,52 @@
 function travelTime(input){
 
-    let destinations = new Map();
+let countries = {};
 
- for(let line of input){
+for(let item of input){
 
-   let temp = line.split(" > ");
+    let currentItem = item.split(" > ");
 
-   console.log(temp);
+    let country = currentItem[0];
+    let city = currentItem[1];
+    let cost = currentItem[2];
 
- }   
+    if(!countries.hasOwnProperty(country)){
+
+       countries[country] = {};
+    }
+
+    if(!countries[country].hasOwnProperty(city)){
+
+        countries[country][city] = cost;
+    }
+
+    if(countries[country][city] > cost){
+
+        countries[country][city] = cost;
+
+    }
+    //console.log(country)             
+
+}
+
+let keys = Object.keys(countries);
+
+    let sorted = keys.sort((a,b) => a.localeCompare(b));
+
+    for(let temp of sorted){
+
+        let entries = Object.entries(countries[temp]);
+
+        let sortedCost = entries.sort((a, b) => a[1] - b[1])
+
+        //console.table(sortedCost)
+
+        for(let state of entries){
+
+            console.log(`${state} -> ${countries[state]} -> ${sortedCost.join(" -> ")}`)
+        }
+
+    }
 
 }
 
