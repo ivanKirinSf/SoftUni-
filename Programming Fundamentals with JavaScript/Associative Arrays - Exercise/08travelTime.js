@@ -2,23 +2,21 @@ function travelTime(input){
 
 let countries = {};
 
-for(let el of input){
+for(let item of input){
 
-    let temp = el.split(" > ");
-
+    let temp = item.split(" > ");
     let country = temp[0];
     let city = temp[1];
     let cost = Number(temp[2]);
 
-    if(!country.hasOwnProperty(country)){
+    if(!country.hasOwnProperty(city)){
 
-       countries[country] = {};
- 
+        countries[country] = {};
     }
 
     if(!countries[country].hasOwnProperty(city)){
 
-        countries[country][city] = cost;
+        countries[country][city] = cost;               
 
     }
 
@@ -27,29 +25,31 @@ for(let el of input){
         countries[country][city] = cost;
 
     }
+
+    let keys = Object.keys(countries);
+
+    keys.sort((a, b) => a.localeCompare(b));
+
+    for(let item of keys){
+
+        let sortedCities = countries[item];
+
+        let data = Object.entries(sortedCities);
+
+        data.sort((a, b) => a[1] - b[1]);
+
+        //console.table(data)
+
+        let result = [];
+
+        result.push(data.join(" -> "));
+
+        console.log(`${item} -> ${data}`);
+    }
+
 }
 
-let countriesKeys = Object.keys(countries);
-
-let sortedKeys = countriesKeys.sort((a,b) => a.localeCompare(b));
-
-let cities = [];
-
-for(let item of sortedKeys){
-
-    //let cities = [];
-
-    cities.push(countries[item]);
-
-    
-}
-
-console.table(cities)
-
-//console.log(sortedKeys)
-
-
-
+//console.table(countries)
 
 }
 
