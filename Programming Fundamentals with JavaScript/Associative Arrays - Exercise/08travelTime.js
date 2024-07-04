@@ -1,51 +1,46 @@
-function travelTime(input) {
+function travelTime(input){
 
-    let countries = {};
+ let countries = {};
 
-    for(let el of input){
-        let temp = el.split(" > ");
+ for(let el of input){
 
-        let country = temp[0];
-        let city = temp[1];
-        let price = Number(temp[2]);
- 
-        if(!countries.hasOwnProperty(country)){
+  let temp = el.split(" > ");
 
-           countries[country] = {}; 
+  let country = temp[0];
 
-        }
+  let city = temp[1];
 
-        if(!countries[country].hasOwnProperty(city)){
+  let price = Number(temp[2]);
 
-           countries[country][city] = price;
+  if(!countries.hasOwnProperty(country)){
 
-        }
+    countries[country] = {};
 
-        if(countries[country][city] > price){
+  }
 
-            countries[country][city] = price;
+  if(!countries[country].hasOwnProperty(city)){
+    countries[country][city] = price;
+  }
 
-        }
+  if(countries[country][city] > price){
 
-        let keys = Object.keys(countries);
+    countries[country][city] = price;
 
-        keys.sort((a, b) => a.localeCompare(b));
+  }
 
-        for(let item of keys){
+  let keys = Object.entries(countries);
 
-           let sortedCities = Object.entries(countries[item]);
+  keys.sort((a,b) => a.localeCompare(b));
 
-           sortedCities.sort((a,b) => a[1] - b[1]);
+  for(let item of keys){
 
-           let result = [];
+    let sortedCities = Object.entries(countries[item]);  
+    
+    sortedCities.sort((a,b) => a[1] - b[1]);    
 
-           result.push(sortedCities.join(" -> "));
-
-           console.log(`${item} -> ${result.join(" ")}`)
-
-        }
-
-    }
+  }
+  
+ }
 
 }
 
