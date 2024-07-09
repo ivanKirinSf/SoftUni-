@@ -1,33 +1,16 @@
 function arenaTier(input){
 
-    let  gladiatorsPool = {};
+   let gladiatorsPool = new Map {};
 
-    for(let line of input){
+   let command = input[index];
 
-        if(line === "Ave Cesar"){
-            break;
-        }
+   while(command !== "Ave Cesar"){
 
-        let temp = line.split(" ");
+    let [name, technique, skill] = input[index].split(" -> ")
 
-        console.log(temp)
-
-
-        if(line.split(" -> ")){
-
-            let name = line[0];
-
-            let skill = line[1];
-
-            let num = Number(line[2]);
-
-            console.log = name;
-
-        }           
-             
-               
-    }
-
+    index ++
+   
+}
 
 
 }
