@@ -1,15 +1,16 @@
 function arenaTier(input){
 
-   let gladiatorsPool = new Map {};
+let gladiatorsPool = new Map();
 
-   let command = input[index];
+let index = 0;
+let command = input[index];
+while(command !== "Ave Cesar"){
 
-   while(command !== "Ave Cesar"){
+    let [name, technique, skill] = command.split(" -> ");
 
-    let [name, technique, skill] = input[index].split(" -> ")
+    //console.log(name)
 
-    index ++
-   
+    index++;
 }
 
 
