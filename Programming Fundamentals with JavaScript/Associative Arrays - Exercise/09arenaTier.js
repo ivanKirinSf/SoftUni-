@@ -3,16 +3,31 @@ function arenaTier(input){
 let gladiatorsPool = new Map();
 
 let index = 0;
+
 let command = input[index];
+
+index ++;
+
 while(command !== "Ave Cesar"){
+    action = command.split(" -> ");
+    let name = action.shift();
+    let technique = action.shift();
+    let skill = action.shift();
 
-    let [name, technique, skill] = command.split(" -> ");
+    if(action.length === 3){
+        if(!gladiatorsPool.has(name)){
+            gladiatorsPool.set(name, new Map)
+        }
+    }else {
+        action = command.split(" vs "){
+            let nameA = action.shift();
+            let nameB = action.shift();
+        }
+    }    
 
-    //console.log(name)
-
+    command = input[index];
     index++;
 }
-
 
 }
 
