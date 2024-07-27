@@ -1,40 +1,42 @@
 function arenaTier(input){
 
 let gladiatorsPool = new Map();
+
 let index = 0;
+
 let command = input[index];
-index++;
 
-while(command !== " Ave Cesar "){
-    let action = command.split(" -> ");
+index++
 
-    if(action.length === 3){
-        let [name, technique, skill] = action 
-        
-        if(!gladiatorsPool.has(name)){
+while(command !== "Ave Cesar"){
 
-            gladiatorsPool.set(name, new Map());
-        }
+    let action = command.split(" -> "){
 
-        if(!gladiatorsPool.get(name).has(technique) ||
-            gladiatorsPool.get(name).has(technique) && 
-            gladiatorsPool.get(name).get(technique) < skill){
-                gladiatorsPool.get(name).set(technique, Number(skill))
+        if(action.length === 3){
+
+            let [name, technique, skill] = action;
+
+            if(!gladiatorsPool.has(name)){
+                gladiatorsPool.set(name, new Map())
             }
+
+            if(!gladiatorsPool.get(name).has(technique) ||
+                gladiatorsPool.get(name).has(technique) && 
+                gladiatorsPool.get(name).get(technique)){
+                    gladiatorsPool.get(name).set(technique, Number(skill))
+                }
+        }
     }else{
-        action = command.split(" vs ");
+
+        action = command.split(" vs ")
     }
 
-    command = input[index];
+
+    command = input[index]
     index++
 }
 
-let gladiatorsPoints = new Map();
-
-for (let [gladiatorName, technique] of Array.gladiatorsPool()){
-
-    
-}
+console.table(gladiatorsPool)
 
 }
 
