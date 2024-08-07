@@ -1,50 +1,60 @@
-function arenaTier(input){
+function arenaTier(data){
 
-let gladiatorPool = new Map();
+    let gladiatorsPool = new Map();
 
-let index = 0;
-let command = input[index];
+    let index = 0;
 
-index++;
+    let command = data[index];
 
-while( command === "Ave Cesar"){
+    index++;
 
-    let action = command.split(" -> ");
+    while(command !== "Ave Cesar"){
 
-    if(action.length === 3){
-        let [name, technique, skill] = action;
+        let action = command.split(" -> ");
+        if(action.length === 3){
+            let [name, technique, skill] = action;
+            if(!gladiatorsPool.has(name)){
+                gladiatorsPool.set(name, new Map())
+            }
 
-        if(!gladiatorPool.has(name)){
-            gladiatorPool.get(name, new Map())
+            if(!gladiatorsPool.get(name).has(technique) || 
+               gladiatorsPool.get(name).has(technique) &&
+               gladiatorsPool.get(name).get(technique)< skill){
+                gladiatorsPoll.get(name).set(technique, Number(skill));
+
+               }
+
+        }else{
+            action = command.split(" vs ");
+
         }
 
-        if(!gladiatorPool.get(name).has(technique) || 
-            gladiatorPool.get(name).has(technique) && 
-            gladiatorPool.get(name).get(technique)){
-            gladiatorPool.get(name).set(technique, Number(skill))
-            }          
-        
-     
+        command = data[index];
+        index ++;
 
-    } else {
-        action = command.split(" vs ");       
     }
 
-}
+    let gladiatorsPoints = new Map();
 
-      let gladiatorsPoints = new Map();
-
-      for(let [name, technique] of Array(gladiatorPool)){
-
-        let sum = 0; 
-
-        for(let [tech, skill] of technique){
-            sum += skill
+    for( let [gladiatorsName, technique] of Array.from(gladiatorsPool)){
+        let sum = 0;
+        for(let [tech, skill] of Array.from(technique)){
+            sum += skill;
         }
 
-        gladiatorPool.set(name, skill)
+        gladiatorsPoints.set(gladiatorsName, sum);
+    }
 
-      }
+    let sortGladiatorsByPoints = Array.from(gladiatorName).sort((a,b) => {
+        return b[1] - a[1] || a[0].localeCompare(b[0])
+    })
+    for(let [name, point] of sortGladiatorsByPoints){
+
+        console.log(`${name}: ${point} skill`)
+
+    }
+
+
 }
 
 arenaTier([
