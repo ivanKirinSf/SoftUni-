@@ -25,7 +25,12 @@ function arenaTier(data){
                }
 
         }else{
-            action = command.split(" vs ");
+            let [gladiatorA, gladiatorB] = command.split(" vs ");
+            if(gladiatorsPool.has(gladiatorA)&& gladiatorsPool.has(gladiatorB)){
+                let techGladiatorA = gladiatorsPool.get(gladiatorA);
+                let techGladiatorA = gladiatorsPool.get(gladiatorA);
+                let bigSkillMap = techGladiatorA.size() > techGladiatorB.size() ? techGladiatorA : techGladiatorB
+            }
 
         }
 
@@ -50,7 +55,14 @@ function arenaTier(data){
     })
     for(let [name, point] of sortGladiatorsByPoints){
 
-        console.log(`${name}: ${point} skill`)
+        console.log(`${name}: ${point} skill`);
+        let tech = Array.from(gladiatorsPool.get(name)).sort((a,b) => {
+            return b[1] - a[1] || a[0].localeCompare(b[0])
+        });
+
+        for([techName, skillPoints] of tech) {
+            console.log(`-${techName} <!> ${skillPoints}`)
+        }
 
     }
 
