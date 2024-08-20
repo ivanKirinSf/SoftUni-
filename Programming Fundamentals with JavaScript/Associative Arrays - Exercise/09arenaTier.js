@@ -28,11 +28,21 @@ function arenaTier(data){
             let [gladiatorA, gladiatorB] = command.split(" vs ");
             if(gladiatorsPool.has(gladiatorA)&& gladiatorsPool.has(gladiatorB)){
                 let techGladiatorA = gladiatorsPool.get(gladiatorA);
-                let techGladiatorA = gladiatorsPool.get(gladiatorA);
-                let bigSkillMap = techGladiatorA.size() > techGladiatorB.size() ? techGladiatorA : techGladiatorB
+                let techGladiatorB = gladiatorsPool.get(gladiatorB);
+                let bigSkillMap = Math.max(techGladiatorA.size(), techGladiatorB.size())
+                let smallSkillMap = Math.min(techGladiatorA.size(), techGladiatorB.size());
+                for [let [techName, skill] of Array.from(bigSkillMap)] {
+                    if (smallSkillMap.has(techName)) {
+                        if(techGladiatorA.get(techName) > techGLadiatorB.get(techName)){
+                            techGLadiatorB.delete(techName)
+                    }else {
+                        techGladiatorB.delete(techName)
+                    }
+                }
             }
 
         }
+        
 
         command = data[index];
         index ++;
@@ -67,6 +77,7 @@ function arenaTier(data){
     }
 
 
+}
 }
 
 arenaTier([
