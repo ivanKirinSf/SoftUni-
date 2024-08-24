@@ -1,18 +1,29 @@
 function legendaryFarming(input){
     
-let keyMaterialsQuantity = input.split(" ");
+let arr = input.split(" ");
 
-let junkMaterialsQuantity = {};
+let keyMat = { shadowmourne : 0 , valanyr : 0 , dragonwrath : 0 };
 
-for(let i = 0; i < input.length; i+=2){
+let junkMat = {};
 
-    let matQuantity = Number(input[i]);
+for(let i = 0 ; i < arr.length; i += 2){
+    
+    let material = arr[i + 1].toLowerCase();
 
-    let matName = input[i+1].toLowerCase();
+    let quantity = Number(arr[i]);
+    
+    //console.log(material);
+    //console.log(quantity);
 
-    console.log(matName);
+    if(material in keyMat){
+
+        keyMat[material] += quantity;
+
+        console.table(keyMat)
+    }
+
 }
 
 }
 
-legendaryFarming('3 Motes 5 stones 5 Shards 6 leathers 255 fragments 7 Shards')
+legendaryFarming('3 Valanyr 5 stones 5 Shards 6 leathers 255 fragments 7 Shards')
