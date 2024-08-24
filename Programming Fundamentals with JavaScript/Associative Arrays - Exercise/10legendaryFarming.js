@@ -1,15 +1,16 @@
 function legendaryFarming(input){
     
-let materials = input.split(" ");
+let keyMaterialsQuantity = input.split(" ");
 
-let quantity = {};
+let junkMaterialsQuantity = {};
 
 for(let i = 0; i < input.length; i+=2){
 
-    let temp = input[i];
-    let quantity = input[i+1];
-    console.log(temp);
+    let matQuantity = Number(input[i]);
 
+    let matName = input[i+1].toLowerCase();
+
+    console.log(matName);
 }
 
 }
