@@ -2,44 +2,57 @@ function legendaryFarming(input){
     
 let arr = input.split(" ");
 
-let keyMat = { shards : 0, fragments : 0, dragonwrath : 0 };
+let keyMat = { Shards : 0, Fragments : 0, Motes : 0};
+
 let junkMat = {};
 
-let legendaries = { shards : "Shadowmourne", fragments : "valanyr", motes : "Dragonwrath" }
+let legendaries =  {shards : "Shadowmourne", fragments : "Valanyr", Motes : "Dragonwrath" };
 
-for(let i = 0; i < arr.length; i+=2){
+for (let i = 0 ; i < arr.length; i+=2){
 
-    let quantity = Number(arr[i]);
-    let mat = arr[i+1].toLowerCase();
+    let mat = arr[i].toLowerCase();
+
+    let quantity = Number(arr[i-1]);
 
     if(mat in keyMat){
 
         keyMat[mat] += quantity;
 
         if(keyMat[mat] >= 250){
-            legendaries = legendaries[mat];
+
             keyMat[mat] -= 250;
             console.log(`${legendaries} obtained!`);
             break;
+
         }
     }
 
     if(mat in junkMat){
+
         junkMat[mat] += quantity;
+
     }else{
 
-        junkMat[mat] = quantity;        
-    }
+        junkMat[mat] = quantity;
 
-    //console.table(junkMat)
-
-    let sortedKeyMat = Object.entries(keyMat).sort((a,b) => b[1] - a[1] || a.localeCompare(b));
-    let sortedJunkMat = Object.entries(junkMat).sort((a,b) => a.localeCompare(b));
-
-    console.table(sortedJunkMat)
+    }   
 
 }
 
+Object.entries(keyMat).sort(((a,b)=> b[1] - a[1]) || ((a,b)=> a.localeCompare(b)) );
+
+Object.entries(junkMat).sort((a,b) => a.localeCompare(b));
+
+for(let mat in keyMat){
+
+    console.log(`${mat} : ${keyMat[mat]}`)
+}
+
+for(let mat in junkMat){
+
+    console.log(`${mat} : ${junkMat[mat]}`)
+
+}
 
 }
 
