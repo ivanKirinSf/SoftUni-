@@ -1,61 +1,57 @@
 function legendaryFarming(input){
     
-let arr = input.split(" ");
+let arr = input.split();
 
-let keyMat = { Shards : 0, Fragments : 0, Motes : 0};
+let keyMat = {shards : 0, fragments : 0, motes : 0 };
 
 let junkMat = {};
 
-let legendaries =  {shards : "Shadowmourne", fragments : "Valanyr", Motes : "Dragonwrath" };
+let legendaries = { shards : "Shadowmourne", fragments : "Valanyr", motes : "Dragonwrath" }
 
-for (let i = 0 ; i < arr.length; i+=2){
+for(let i = 0; i< arr.length; i+=2){
 
-    let mat = arr[i].toLowerCase();
+  let mat = arr[i].toLowerCase();
+  
+  let quantity = Number(arr[i-1]);
 
-    let quantity = Number(arr[i-1]);
+  if(mat in keyMat){
+     
+    keyMat[mat] += quantity;
 
-    if(mat in keyMat){
+    if(keyMat[mat] >= 250){
 
-        keyMat[mat] += quantity;
+        let legendary = legendaries[mat];
 
-        if(keyMat[mat] >= 250){
+        keyMat[mat] -= 250;
 
-            keyMat[mat] -= 250;
-            console.log(`${legendaries} obtained!`);
-            break;
-
-        }
+       console.log(`${legendary} obtained!`);
+       break;
     }
 
-    if(mat in junkMat){
+  }
 
-        junkMat[mat] += quantity;
+  if(mat in junkMat){
 
-    }else{
+    junkMat[mat] += quantity;
+  }else{
 
-        junkMat[mat] = quantity;
+    junkMat[mat] = quantity;
 
-    }   
+  }
 
 }
 
-Object.entries(keyMat).sort(((a,b)=> b[1] - a[1]) || ((a,b)=> a.localeCompare(b)) );
+let keyMatEntries =Object.entries(keyMat).sort(((a,b)=> b[1] - a[1]) || (a,b) => a[0].localeCompare(b[0]));
+let junkMatEntries = Object.entries(junkMat).sort((a,b)=> a[0].localeCompare(b[0]));
 
-Object.entries(junkMat).sort((a,b) => a.localeCompare(b));
-
-for(let mat in keyMat){
-
-    console.log(`${mat} : ${keyMat[mat]}`)
+for(let [material, quant] in keyMatEntries){
+    console.log(`${material} : ${quant}`)
 }
 
-for(let mat in junkMat){
-
-    console.log(`${mat} : ${junkMat[mat]}`)
-
+for(let [materja, quant] in junkMatEntries){
+    console.log(`${material} : ${quant}`);
 }
 
 }
 
-legendaryFarming( '3 Valanyr 5 stones 5 Shards 6 leathers 255 fragments 7 Shards'
-    //'3 Valanyr 5 stones 5 Shards 6 leathers 255 fragments 7 Shards'
-    )
+legendaryFarming( '3 Motes 5 stones 5 Shards 6 leathers 255 fragments 7 Shards')
