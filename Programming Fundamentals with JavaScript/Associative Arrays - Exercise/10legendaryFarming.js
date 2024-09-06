@@ -1,57 +1,71 @@
 function legendaryFarming(input){
-    
-let arr = input.split();
 
-let keyMat = {shards : 0, fragments : 0, motes : 0 };
+    let arr = input.split(" ");
 
-let junkMat = {};
+    let keyMat = {shards : 0, fragments : 0, motes : 0};
 
-let legendaries = { shards : "Shadowmourne", fragments : "Valanyr", motes : "Dragonwrath" }
+    let junkMat = {};
 
-for(let i = 0; i< arr.length; i+=2){
+    let legendaries = { shards : "Shadowmourne", fragments : "Valanyr", motes : "Dragonwrath" };
 
-  let mat = arr[i].toLowerCase();
-  
-  let quantity = Number(arr[i-1]);
+    for( let i = 0; i < arr.length; i+=2 ){
 
-  if(mat in keyMat){
-     
-    keyMat[mat] += quantity;
+        let mat = arr[i+1].toLowerCase();
 
-    if(keyMat[mat] >= 250){
+        let num = Number(arr[i]);
 
-        let legendary = legendaries[mat];
+        
 
-        keyMat[mat] -= 250;
+        console.log(num);
 
-       console.log(`${legendary} obtained!`);
-       break;
+        if(mat in keyMat){
+
+           keyMat[mat] += num;
+
+           if(keyMat[mat] >= 250){
+
+            keyMat[mat] -= 250;
+
+            let legendary = legendaries;
+
+            console.log(`${legendary[mat]} obtained!`);
+
+            break;            
+
+           }
+
+        }
+
+        if(mat in junkMat){
+
+            junkMat[mat] += num;
+
+        }else{
+
+            junkMat[mat] = num;
+
+        }
+
+        //console.table(junkMat)
+
     }
 
-  }
+    let entriesKeyMat = Object.entries(keyMat).sort((a,b) => b[1] - a[1] || a[1].localeCompare(b[1]));
 
-  if(mat in junkMat){
+    let entriesJunkMat = Object.entries(junkMat).sort((a,b) => a[1].localeCompare(b[1]));
 
-    junkMat[mat] += quantity;
-  }else{
+    for(let [keyMaterials, quantity] in entriesJunkMat){
 
-    junkMat[mat] = quantity;
+        console.log(`${keyMaterials} : ${quantity}`);
 
-  }
+    }
 
+    for(let [junkMaterials, quantity] in entriesJunkMat){
+
+        console.log(`${junkMaterials} : ${quantity}`);
+
+    }
 }
 
-let keyMatEntries =Object.entries(keyMat).sort(((a,b)=> b[1] - a[1]) || (a,b) => a[0].localeCompare(b[0]));
-let junkMatEntries = Object.entries(junkMat).sort((a,b)=> a[0].localeCompare(b[0]));
 
-for(let [material, quant] in keyMatEntries){
-    console.log(`${material} : ${quant}`)
-}
-
-for(let [materja, quant] in junkMatEntries){
-    console.log(`${material} : ${quant}`);
-}
-
-}
-
-legendaryFarming( '3 Motes 5 stones 5 Shards 6 leathers 255 fragments 7 Shards')
+legendaryFarming('3 Motes 5 stones 5 Shards 6 leathers 255 fragments 7 Shards')
