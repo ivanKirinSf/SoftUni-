@@ -1,11 +1,9 @@
 function substring(txt, start, count){
 
-    let str = txt;
+  let newText = txt.substring(start, start+count);
 
-    let newStr = str.substring(start, start+count);
-
-    console.log( newStr )
+  console.log(newText);
 
 }
 
-substring('ASentence', 1, 8)
+substring('SkipWord', 4, 7)
