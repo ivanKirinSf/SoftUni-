@@ -1,27 +1,19 @@
 function countStringOccurrences(txt, word){
 
-    let str = txt.split(" ");
+let arr = txt.split(" ");
 
-    let counter = 0;
+let times = 0;
 
-    for(let i = 0; i < str.length; i++){
+for(let i = 0; i < arr.length; i++){
 
-        let temp = str[i];
-
-        if(temp === word){
-
-            counter += 1;
-
-        }
-
-
-
-        //console.log(temp)
+    if(arr[i] === word){
+        times ++;
     }
+}
 
-    console.log(counter)
+console.log(times)
 
 }
 
-countStringOccurrences('softuni is great place for learning new programming languages',
-'softuni')
+countStringOccurrences('This is a word and it also is a sentence',
+'is')
