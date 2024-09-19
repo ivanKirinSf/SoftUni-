@@ -1,14 +1,14 @@
 function revealWords(words, txt){
 
+    let wordsData = words.split(", ");
+
     let word = "";
 
     let wordStars = "";
 
-    let counter = 0;
+    if(wordsData.length > 1){
 
-    if(words.length >= 2){
-
-        let wordsData = words.split(", ");
+        
 
         for(let el of wordsData){
 
@@ -18,17 +18,36 @@ function revealWords(words, txt){
 
             if(txt.includes(wordStars)){
 
-                txt = txt.replace(wordStars, word)
+                while(txt.includes(wordStars)){
 
-            }
+                txt = txt.replace(wordStars, word);
 
-            
+                }
+              
+
+            }        
 
 
 
-            console.log(wordStars)
+            //console.log(wordStars)
         }
 
+    }else{
+
+        word = words;
+
+        let wordStars = "*".repeat(word.length);
+
+        if(txt.includes(wordStars)){
+
+            while(txt.includes(wordStars)){
+
+                txt = txt.replace(wordStars, word);
+
+            }           
+
+        }   
+        //console.log(wordStars)
     }    
 
     console.log(txt)
