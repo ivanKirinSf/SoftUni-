@@ -1,58 +1,39 @@
-function revealWords(words, txt){
+function revealWords(words, txt) {
 
-    let wordsData = words.split(", ");
+    let arrWords = words.split(", ");
 
-    let word = "";
+    let arrTxt = txt.split(" ");
 
-    let wordStars = "";
+    //console.log(arrTxt);
 
-    if(wordsData.length > 1){
+    for (let elWords of arrWords) {
 
-        
+        let tempWords = elWords;
 
-        for(let el of wordsData){
+        let wordStars = '*'.repeat(tempWords.length);
 
-            word = el;
+        for (let i = 0; i < arrTxt.length; i++) {
 
-            let wordStars = "*".repeat(word.length);
+            let tempTxt = arrTxt[i];
 
-            if(txt.includes(wordStars)){
+            if (wordStars === tempTxt) {
 
-                while(txt.includes(wordStars)){
+                arrTxt.splice(i, 1, tempWords);
 
-                txt = txt.replace(wordStars, word);
-
-                }
-              
-
-            }        
+            }
 
 
-
-            //console.log(wordStars)
+            //console.log(tempTxt)
         }
 
-    }else{
+        //for(let i = 0; i < arrTxt)
 
-        word = words;
 
-        let wordStars = "*".repeat(word.length);
+    }
 
-        if(txt.includes(wordStars)){
-
-            while(txt.includes(wordStars)){
-
-                txt = txt.replace(wordStars, word);
-
-            }           
-
-        }   
-        //console.log(wordStars)
-    }    
-
-    console.log(txt)
+    console.log(arrTxt.join(" "))
 
 }
 
 revealWords('great, learning',
-'softuni is ***** place for ******** new programming languages')
+    'softuni is ***** place for ******** new programming languages')
