@@ -1,63 +1,54 @@
 function pascalCaseSplitter(str){
 
-    let start = 0;
+    let word = "";   
+    
+    let arr = [];
 
-    let end = 0;
+   for(let i = 0; i < str.length; i++){
 
-    let isWord = false;
+       let ch = str[i];
 
-    let arrOfWords = [];
+       let chCode = ch.charCodeAt();
 
-    for(let i = 0; i < str.length; i++){
+       if(chCode >= 65 && chCode <= 90){
 
-        let ch = str[i];
+        word += ch;
 
-        let chCode = ch.charCodeAt();
+        for(let k = i+1; k < str.length; k++){
 
-        if(chCode >= 25 && chCode <= 90){
+            let chK = str[k];
 
-            start = i;
+            let chCodeK = chK.charCodeAt();
 
-            for(let k = i+1; k < str.length; k++){
+            if(chCodeK >= 97 && chCodeK <= 122){
 
-                let chK = str[k];
-
-                let chCodeK = chK.charCodeAt();
-
-                if(chCodeK >= 25 && chCodeK <= 90){
-
-                    end = k;
-                    
-                    i = k-1;
-                    
-                    word = str.slice(start, end);
-
-                    arrOfWords.push(word);
-
-                    break;
-                }  
-                
-                if(k === str.length-1){
-
-                    end = k+1;                
-                    
-                    word = str.slice(start, end);
-
-                    arrOfWords.push(word);
-
-                    break;
-
-                }
+                word += chK;                
 
             }
 
-        }
+            if(chCodeK < 97 || chCodeK > 122){
 
-        //console.log(arrOfWords)
-    }  
-    
-    console.log(arrOfWords.join(", "));
+                i = k-1;
+
+                break;
+            }
+            
+        }       
+
+   }   
+
+   if(word.length > 0){
+
+    arr.push(word)
+
+    word = "";
+
+   }
+   
+}
+
+console.log(arr.join(", "))
 
 }
 
-pascalCaseSplitter('SplitMeIfYouCanHaHaYouCantOrYouCan')
+pascalCaseSplitter('ThisIsSoAnnoyingToDo')
