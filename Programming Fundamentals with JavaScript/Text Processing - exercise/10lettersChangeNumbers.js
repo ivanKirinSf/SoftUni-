@@ -1,8 +1,39 @@
 function lettersChangeNumbers(txt){
 
+    let arrTxt = txt.split("");
+
+    let newArr = arrTxt;
     
 
-    let arr = txt.split(" ");
+    for(let p = 0; p < newArr.length; p++){
+
+        let tempP = arrTxt[p];
+
+        if(tempP === " "){
+
+            index = p+1;
+            while(newArr[index] === " "){
+
+                let el = ""
+
+                newArr.splice(index, 1);
+
+                index--;
+            }
+        }
+
+    }
+
+    //console.log(arrTxt)
+
+    let arr = newArr.join("");
+
+    //console.log(arr)
+    
+
+    arr = arr.split(" ");
+
+    //console.log(arr)
 
     let num = ""
 
