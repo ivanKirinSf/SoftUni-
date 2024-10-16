@@ -3,6 +3,7 @@ function lettersChangeNumbers(txt){
     let arrTxt = txt.split("");
 
     let newArr = arrTxt;
+
     
 
     for(let p = 0; p < newArr.length; p++){
@@ -14,11 +15,9 @@ function lettersChangeNumbers(txt){
             index = p+1;
             while(newArr[index] === " "){
 
-                let el = ""
-
                 newArr.splice(index, 1);
 
-                index--;
+                //index++;
             }
         }
 
