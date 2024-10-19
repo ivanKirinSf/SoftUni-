@@ -4,21 +4,25 @@ function lettersChangeNumbers(txt){
 
     let newArr = arrTxt;
 
-    
-
     for(let p = 0; p < newArr.length; p++){
 
         let tempP = arrTxt[p];
 
         if(tempP === " "){
 
-            index = p+1;
-            while(newArr[index] === " "){
+            for(let k = p+1; k < newArr.length; k++){
 
-                newArr.splice(index, 1);
+                if(newArr[k] === " "){
 
-                //index++;
+                    newArr.splice(index, 1);
+
+                }else{
+                    
+                    break;
+                }
+
             }
+            
         }
 
     }
@@ -29,7 +33,6 @@ function lettersChangeNumbers(txt){
 
     //console.log(arr)
     
-
     arr = arr.split(" ");
 
     //console.log(arr)
