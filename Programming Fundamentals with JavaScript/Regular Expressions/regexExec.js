@@ -1,14 +1,19 @@
-function regexExec(){
+function matchFullName(input){
 
-    let text = " Peter: 123 Mark: 456";
-    let regexp = /([A-Z][a-z]+): (\d+)/g;
-    let firstMatch = regexp.exec(text);
-    let secondMatch = regexp.exec(text);
+       let regex = /\b[A-Z][a-z]+[ ][A-Z][a-z]+\b/g;
 
-    console.log(firstMatch[0]);
-    console.log(firstMatch[1]);
-    console.log(firstMatch[2]);
+       let validNames = [];
+
+       let name = null;
+
+       while((name = regex.exec(input)) !== null){
+
+        validNames.push(name[0]);
+
+       }
+
+       console.log(validNames.join(" "))
 
 }
 
-regexExec()
+matchFullName("Ivan Ivanov, Ivan ivanov, ivan Ivanov, IVan Ivanov, Test Testov, Ivan	Ivanov")
