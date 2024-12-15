@@ -1,16 +1,17 @@
 function furniture(input){
 
-    let pattern = />>(?<name>[A-Z][A-Za-z]+)<<(?<num>[0-9.]+)!(?<quantity>\d+)/;
+ let pattern = /(?<product>[A-Za-z])<<(?<price>[0-9.]+)!(?<quantity>\d+)/g;
 
-    for(let line of input){
-        if(line === "Purchase"){
-            break;
-        }
-
-        if(pattern.test(line)){
-            
-        }
+ for(let line of input){
+    if(input[line] === 'Purchase'){
+        break;
     }
+
+    if(pattern.test(line)){
+
+        let product = pattern.exec(line);
+    }
+ }
 
 }
 
