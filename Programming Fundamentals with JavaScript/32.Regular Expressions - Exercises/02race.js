@@ -1,18 +1,23 @@
 function race(input){
 
-    let pattern = /[A-Z]+[a-z]+[0-9]/g;
+    let RacersList = input.shift();
 
-    let racersList = input.shift();
+    let pattern = /(?<name>[A-Za-z]+)+(?<distance>[0-9]+)/;
 
-    let racersDate = [];
+    let personDist = ""
 
     for(let line of input){
 
+        if(line === "end of race"){
+            break;
+        }
+
         if(pattern.test(line)){
 
-                        
+            let personData = pattern.exec(line);
+            let personDistance = personData.groups.distance;
 
-        }
+        }        
 
     }
         
