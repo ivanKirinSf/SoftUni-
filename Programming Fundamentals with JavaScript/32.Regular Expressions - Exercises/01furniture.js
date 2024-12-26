@@ -1,23 +1,35 @@
-function solve(input){
+function furniture(input){
 
-    let regex = />>(?<product>[A-Z]+[A-Z][a-z]+)<<(?<price>\d+)!(?<quantity>d\+)/g;
+   let pattern = />>(?<name>[A-Za-z]+)<<(?<price>[0-9.]+)!(?<quantity>\d+)/
 
-    for(let line of input){
+   let totalPrice = 0;
 
-        if(line === "Purchase"){
-            break;
-        }
+   console.log("Bought furniture:");
 
-        if(regex.test(line)){
+   for(let line of input){
 
-            
-        }
-    }
+      if(line === "Purchase"){
+         break;
+      }
 
+      if(pattern.test(line)){
+
+         let product = pattern.exec(line);
+
+         let productPrice = Number(product.groups.price)*Number(product.groups.quantity);
+
+         totalPrice += productPrice;
+
+         console.log(product.groups.name);
+
+      }
+   }
+
+console.log(`Total money spend: ${totalPrice.toFixed(2)}`);
 
 }
 
-solve(['>>Laptop<<312.2323!3',
+furniture(['>>Laptop<<312.2323!3',
     '>>TV<<300.21314!5',
     '>Invalid<<!5',
     '>>TV<<300.21314!20',
