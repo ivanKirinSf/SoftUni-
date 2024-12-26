@@ -30,11 +30,8 @@ function cleverLilly(input) {
     let diffrence = Math.abs(savedMoney - washingMachinePrice)
   
     if(savedMoney >= washingMachinePrice){
-      console.log(`Yes! ${diffrence.toFixed(2)}`)
+      console.log(`Yes!${diffrence.toFixed(2)}`)
     } else {
-      console.log(`No! ${diffrence.toFixed(2)}`)
+      console.log(`No!${diffrence.toFixed(2)}`)
     }
-  
-  
-  
-  }
+   }
