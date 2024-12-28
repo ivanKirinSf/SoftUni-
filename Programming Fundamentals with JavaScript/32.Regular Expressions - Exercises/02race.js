@@ -35,11 +35,13 @@ function race(input){
     
  }
 
- let sorted = Object.entries(participants).sort((a,b) => a[1] - b[1]);
+ let sorted = Object.entries(participants).sort((a,b) => b[1] - a[1]);
 
+console.table(sorted)
 
-
- console.table(sorted)
+ console.log(`1st place: ${sorted[0][0]}`);
+ console.log(`1st place: ${sorted[1][0]}`);
+ console.log(`1st place: ${sorted[2][0]}`);
         
 }
 
