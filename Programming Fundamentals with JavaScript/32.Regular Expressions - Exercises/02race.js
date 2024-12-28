@@ -4,6 +4,11 @@ function race(input){
 
  let participants = {};
 
+ for(let partNames of participantsArr){
+
+    participants[partNames] = 0;
+ }
+
  let patternName = /[A-Za-z]/g;
 
  let patternDist = /[0-9]/g;
@@ -15,9 +20,7 @@ function race(input){
     }
 
     let name = line.match(patternName).join("");
-
-    participants[name] = 0;
-
+   
     let distanceArr = line.match(patternDist);
 
     let totalDist = 0;
@@ -30,14 +33,13 @@ function race(input){
 
     if(participants.hasOwnProperty(name)){
         participants[name] += totalDist
-    }
-    
+    }    
     
  }
 
  let sorted = Object.entries(participants).sort((a,b) => b[1] - a[1]);
 
-console.table(sorted)
+//console.table(sorted)
 
  console.log(`1st place: ${sorted[0][0]}`);
  console.log(`1st place: ${sorted[1][0]}`);
