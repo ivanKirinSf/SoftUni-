@@ -1,57 +1,43 @@
 function race(input){
 
- let participantsArr = input.shift().split(", ");
+   let participantsArr = input.shift().split(", ");
 
- let participants = {};
+   let participants = {};
 
- for(let partNames of participantsArr){
+   for(let el of participantsArr){
 
-    participants[partNames] = 0;
- }
+      participants[el] = 0;
+   }
 
- let patternName = /[A-Za-z]/g;
+   console.table(participants); 
 
- let patternDist = /[0-9]/g;
+   let patternName = /[A-Za-z]/;
 
- for(let line of input){
+   let patternDist = /[0-9]/;
 
-    if(line === "end of race"){
-        break;
-    }
+   for(let line of input){
 
-    let name = line.match(patternName).join("");
-   
-    let distanceArr = line.match(patternDist);
+      if(line === "end of race"){
+         break;
+      }
 
-    let totalDist = 0;
+      if(line.match(patternName)){
 
-    for(let el of distanceArr){
+         let name = patternName.exec(line);
 
-        totalDist += Number(el);
+         //console.log(name)
+      }
+   }
 
-    }
-
-    if(participants.hasOwnProperty(name)){
-        participants[name] += totalDist
-    }    
-    
- }
-
- let sorted = Object.entries(participants).sort((a,b) => b[1] - a[1]);
-
-//console.table(sorted)
-
- console.log(`1st place: ${sorted[0][0]}`);
- console.log(`1st place: ${sorted[1][0]}`);
- console.log(`1st place: ${sorted[2][0]}`);
-        
 }
 
-race(['George, Peter, Bill, Tom',
-    'G4e@55or%6g6!68e!!@ ',
-    'R1@!3a$y4456@',
-    'B5@i@#123ll',
-    'G@e54o$r6ge#',
-    '7P%et^#e5346r',
-    'T$o553m&6',
-    'end of race'])
+race([
+   'George, Peter, Bill, Tom',
+   'G4e@55or%6g6!68e!!@ ',
+   'R1@!3a$y4456@',
+   'B5@i@#123ll',
+   'G@e54o$r6ge#',
+   '7P%et^#e5346r',
+   'T$o553m&6',
+   'end of race'
+])
