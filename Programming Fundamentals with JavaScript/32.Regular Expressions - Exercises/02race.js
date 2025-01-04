@@ -1,52 +1,28 @@
 function race(input){
 
-let participantsArr = input.shift().split(", ");
+let racersList = input.shift().split(" ");
 
 let participants = {};
 
-for(let partName of participantsArr){
-
-   participants[partName] = 0;
-}
-
 let patternName = /[A-Za-z]/g;
 
-let patternDist = /[0-9]/g;
-
-let distance = 0;
+let patternKm = /[0-9]/g;
 
 for(let line of input){
 
    if(line === "end of race"){
       break;
-   }
-
-   let name = line.match(patternName).join("");
-
-   let distArr = line.match(patternDist);
-
-   for(let num of distArr){
-
-      distance += Number(num);     
 
    }
 
-   if(participants.hasOwnProperty(name)){
+   if(patternName.test(line)){
 
-      participants[name] += distance;
+      let name = patternName.exec(line);
+
+      console.log(name);
 
    }
-
-   distance = 0;
-
-   //console.log(distArr)
 }
-
-let sorted = Object.entries(participants).sort((a,b) => b[1] - a[1])
-
-console.log(`1st place: ${sorted[0][0]}`);
-console.log(`2nd place: ${sorted[1][0]}`);
-console.log(`3rd place: ${sorted[2][0]}`);
 
 }
 
