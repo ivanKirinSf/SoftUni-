@@ -1,35 +1,32 @@
-function race(input){
+function race(input) {
 
-    let participantsList = input.shift().split(", ");
+let participanstList = input.shift().split(", ") ;
 
-    let participants = [];
+let participants ={};
 
-    let patternName = /[A-Za-z]/g;
+let namePatern = /[A-Za-z]/g;
 
-    let patternDist = /[0-9]/g;
+let distancePatrn = /[0-9]/g;
 
-    
-    for(let el of participantsList){
+for(let name of participanstList){
 
-       participants[el] = 0;
+    participants[name] = 0;
 
+}
+
+for(let el of input){
+
+    if(el === "end of race"){
+        break;
     }
 
-    for(let line of input){
+    let runnerName = namePatern.exec(el).join(", ");
 
-        if(line === "end of race"){
-            break;
-        }
+    console.log(runnerName);
 
-        if(line.match(patternName)){
+}
 
-            let name = patternName.match(line);
-
-            console.log(name)
-        }
-    }
-
-    console.log(participantsList)
+//console.log(participanstList)
 
 }
 
