@@ -2,24 +2,53 @@ function race(input) {
 
 let participantsList = input.shift().split(", ");
 
+let participants = {};
+
 let patternName = /[A-Za-z]/g;
 
-let patternLength = /[0-9]/g; 
+let patternLength = /[0-9]/g;
+
+let totalDistance = 0;
+
+for(let participantName of participantsList){
+
+    participants[participantName] = 0;
+}
 
 for(let el of input){
 
     if(el === "end of race"){
+        break;
+    }
 
-    break; 
+    let name = el.match(patternName).join("");
+
+    let distanceArr = el.match(patternLength);
+
+    for(let length of distanceArr){
+
+        totalDistance += Number(length)
 
     }
 
-    let name = el.exec(patternLength);
 
-    console.log(name)
+    if(participants.hasOwnProperty(name)){
+
+        participants[name] += totalDistance;
+
+        totalDistance = 0;         
+
+    }
+
+    //console.log(totalDistance)
+
 }
 
+let sorted = Object.entries(participants).sort((a,b) => b[1]-a[1])
 
+console.log(`1st place: ${sorted[0][0]}`);
+console.log(`2nd place: ${sorted[1][0]}`);
+console.log(`3rd place: ${sorted[2][0]}`);
 
 }
 
