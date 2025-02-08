@@ -2,15 +2,23 @@ function softUniBarIncome(input){
 
     let patternName = /%(?<client>[A-Za-z])%<(?<product>[A-Z]+[a-z])>|(?<quantity>)|(?<price>)$/g;
 
-    for(let line of input){
-        if(line === "end of shift"){
-            break;
-        }
+    totalPrice = 0;
 
+for(let line of input){
 
+    let match = [];
+
+    if(line === "end of shift"){
+        break;
     }
 
+    if(line.test(patternName)){
 
+        match = line.exec(patternName);
+
+        totalPrice += Number(match.groups.price) * Number(match.groups.count);
+    }
+}
 
 }
 
