@@ -1,6 +1,6 @@
 function softUniBarIncome(input){
 
-    let patternName = /%(?<name>[A-Z][a-z]*)%<(?<product>\w+)>|(?<count>\d)|(?<price>[0-9]+)/g;
+    let patternName = /%(?<name>[A-Z][a-z]*)%[^|%$.]*<(?<product>\w+)>[^|%$.]*\|(?<count>\d+)\|[^|%$.0-9]*(?<price>[0-9]+\.?\d*)/g;
 
     totalPrice = 0;
 
