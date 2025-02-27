@@ -4,25 +4,31 @@ function softUniBarIncome(input){
 
     totalPrice = 0;
 
-   for(line of input){
-           
-      let match = [];
+    for(let line of input){
 
-      if(line === "end of shift"){
+       let match = [];
 
-        break;
+       if(line === "end of shift"){
+         break;
+       }
 
-      }
+       if(patternName.test(line)){
 
-      if(patternName.test(line)){
+        match = line.match(patternName);
 
-        let totalPrice = Number(patternName.groups.count) * Number(patternName.groups.price);
+        let price = Number(match.groups.count)*Number(match.groups.price);
 
-        console.log(totalPrice)
+        totalPrice += price;
 
-      }
+        console.log(`${match.groups.name}: ${match.groups.product} - ${price}`);
 
-   }
+       }
+
+    }
+
+    console.log(totalPrice)
+
+ 
 }
 
 softUniBarIncome([
