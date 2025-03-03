@@ -1,37 +1,30 @@
 function softUniBarIncome(input){
 
-    let pattern = /%(?<name>[A-Z][a-z]+)%[^|$%.]*<(?<product>\w+)>[^|$%.]*\|(?<count>\d+)\|[^|$%.0-9]*(?<price>[0-9]+\.?\d*)\$/g;
+    let pattern = /%(?<name>[A-Z][a-z]+)%[^|$%.]*<(?<product>\w+)>[^|$%.]*\|(?<count>\d+)\|[^|$%.0-9]*(?<price>[0-9]+\.?\d*)\$/;
 
-    totalPrice = 0;
+  totalPrice = 0;
 
-   for(let line of input){
+  for(let line of input){
 
     let match = [];
-       if(line === "end of shift"){
 
+    if(line === "end of shift"){
         break;
+    }
 
-       }
-
-       if(pattern.test(line)){
+    if(pattern.test(line)){
 
         match = line.match(pattern);
 
-        //console.log(match.groups.product)
+        let price = Number(match.groups.price)*Number(match.groups.count);
 
-        let price = Number(match.groups.price) * Number(match.groups.count);
-           
         totalPrice += price;
 
         console.log(`${match.groups.name}: ${match.groups.product} - ${price.toFixed(2)}`);
+    }
+  }
 
-       }
-
-
-   }
-
-   console.log(totalPrice.toFixed(2))
-
+  console.log(`Total income: ${totalPrice.toFixed(2)}`)
  
 }
 
