@@ -1,47 +1,56 @@
 function starEnigma(input){
 
-    let numOfmess = input.shift();
+let num = input.shift();
 
-    let decryptionKey = 0;
+let decKey = 0;
 
-    let encryptedMessage = "";
-    //console.log(input)
+let decMessage = "";
 
-    for(let el of input){
+for(let el of input){
 
-        let encMessage = el;
+    let encMessage = el.split("");
 
-        let caseInsensitiveMess = encMessage.toLowerCase().split("");
+    let lowered = el.toLowerCase().split("");
 
-        for(let char of caseInsensitiveMess){
+    for(let char of lowered){
 
-            if(char === "s"){
-                decryptionKey += 1;
-            }else if(char === "t"){
-                decryptionKey += 1;
-            }else if(char === "a"){
-                decryptionKey += 1;
-            }else if(char === "r"){
-                decryptionKey += 1;
-            }
-        }
+        if(char === "s"){
 
-        for(let char2 of caseInsensitiveMess){
+            decKey += 1;
 
-            let value = char2.charCodeAt();
+        }else if(char === "t"){
 
-            let res = value - decryptionKey;
+            decKey += 1;
 
-            let enChar = String.fromCharCode(res)
+        }else if(char === "a"){
 
-            encryptedMessage += enChar;
+            decKey += 1;
+
+        }else if(char === "r"){
+
+            decKey += 1;
 
         }
+    }   
+    
+    for(let char of encMessage){
 
-        console.log(encryptedMessage)
+       let value = char.charCodeAt(0);
 
-        //console.log(caseInsensitiveMess)
+       let res = value - decKey;
+
+       let decChar =  String.fromCharCode(res);
+
+       decMessage += decChar;
+
+       //console.log(decChar);
+
     }
+
+    console.log(decMessage)
+}
+
+console.log(num)
 
 }
 
