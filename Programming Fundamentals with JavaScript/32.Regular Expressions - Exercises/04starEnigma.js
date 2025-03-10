@@ -6,6 +6,8 @@ let decKey = 0;
 
 let decMessage = "";
 
+let pattern = /@(?<name>[A-Z][a-z]*)[^@!:>]*:(?<population>[0-9]*)[^@!:>]*!(?<type>[AD]+)!->(?<count>[0-9]+)/;
+
 for(let el of input){
 
     let encMessage = el.split("");
@@ -13,6 +15,8 @@ for(let el of input){
     let lowered = el.toLowerCase().split("");
 
     for(let char of lowered){
+
+        let match = [];
 
         if(char === "s"){
 
@@ -47,10 +51,23 @@ for(let el of input){
 
     }
 
-    console.log(decMessage)
+    if(pattern.test(decMessage)){
+
+        let match = decMessage.match(pattern); 
+        
+        console.log(match.groups.name)
+        console.log(match.groups.population)
+        console.log(match.groups.type)
+        console.log(match.groups.count)
+
+    }
+
+    //console.log(decMessage)
 }
 
-console.log(num)
+
+
+//console.log(num)
 
 }
 
