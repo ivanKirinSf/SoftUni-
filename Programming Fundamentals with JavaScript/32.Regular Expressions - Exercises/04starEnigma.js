@@ -2,26 +2,39 @@ function starEnigma(input){
 
 let num = input.shift();
 
-let patternCode = /[STARstar]+/;
-
-let code = 0;
+let codePattern = /[STARstar]/g;
 
 let pattern = /@(?<name>[A-Z][a-z]*)[^@!:>]*:(?<population>[0-9]*)[^@!:>]*!(?<type>[AD]+)!->(?<count>[0-9]+)/;
 
+let encMessage = "";
+
 for(let line of input){
-    if(patternCode.test(line)){
 
-        let match = line.match(patternCode);
+    let codeCounter = 0;
 
-        while(match !== null){
+    let match = codePattern.exec(line);
 
-            code++
+    while(match !== null){
 
-        }
+        codeCounter ++;
+
+        match = codePattern.exec(line);
+    }
+
+    for(let el of line){
+
+        let elNum = el.charCodeAt();
+
+        let res = elNum - codeCounter;
+
+        let character  = String.fromCharCode(res);
+
+        encMessage += character;
+        
     }
 }
 
-
+console.log(encMessage)
 
 }
 
