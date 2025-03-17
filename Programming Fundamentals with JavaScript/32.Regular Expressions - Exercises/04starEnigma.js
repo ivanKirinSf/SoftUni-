@@ -4,41 +4,56 @@ let num = input.shift();
 
 let codePattern = /[STARstar]/g;
 
-let pattern = /@(?<name>[A-Z][a-z]*)[^@!:>]*:(?<population>[0-9]*)[^@!:>]*!(?<type>[AD]+)!->(?<count>[0-9]+)/;
+let pattern = /[^@\-!:>\s]*@(?<name>[A-Za-z]+)[^@\-!:>]*:(?<population>\d+)[^@\-!:>\s]*!(?<type>[A|D])![^@\-!:>\s]*\->(?<count>\d+)/;
 
-let codeCounter = 0;
+let newMessage = "";
 
-let decMessage = "";
+let planetAttackList = new Set();
+
+let planetDestructionList = new Set();
 
 for(let line of input){
 
-    if(codePattern.test(line)){
+    let counter = 0;
 
-        let match = codePattern.exec(line);
+    let match = codePattern.exec(line);
 
-        while(match !== null){
+    while(match !== null){
 
-            codeCounter ++;
+        counter ++;
 
-            match = codePattern.exec(line);
-        }
+        match = codePattern.exec(line);
     }
 
     for(let char of line){
 
         let value = char.charCodeAt();
 
-        let res = value - codeCounter;
+        let res = value - counter;
 
-        let newCh = String.fromCharCode(res)
+        let newChar = String.fromCharCode(res);
 
-        decMessage += newCh;        
+        newMessage += newChar
+
+        //console.log(newChar)
     }
 }
 
+if(pattern.test(newMessage)){
 
-console.log(decMessage)
+    let match = newMessage.match(pattern);
 
+    if(match.groups.type === "A"){
+
+        planetAttackList.add(match.groups.name);        
+    }
+
+    if(match.groups.type === "D"){
+
+        planetDestructionList.add(match.groups.name);
+
+    }
+}
 
 }
 
