@@ -6,41 +6,46 @@ let codePattern = /[STARstar]/g;
 
 let pattern = /@(?<name>[A-Z][a-z]*)[^@!:>]*:(?<population>[0-9]*)[^@!:>]*!(?<type>[AD]+)!->(?<count>[0-9]+)/;
 
-let encMessage = "";
+let codeCounter = 0;
+
+let decMessage = "";
 
 for(let line of input){
 
-    let codeCounter = 0;
+    if(codePattern.test(line)){
 
-    let match = codePattern.exec(line);
+        let match = codePattern.exec(line);
 
-    while(match !== null){
+        while(match !== null){
 
-        codeCounter ++;
+            codeCounter ++;
 
-        match = codePattern.exec(line);
+            match = codePattern.exec(line);
+        }
     }
 
-    for(let el of line){
+    for(let char of line){
 
-        let elNum = el.charCodeAt();
+        let value = char.charCodeAt();
 
-        let res = elNum - codeCounter;
+        let res = value - codeCounter;
 
-        let character  = String.fromCharCode(res);
+        let newCh = String.fromCharCode(res)
 
-        encMessage += character;
-        
+        decMessage += newCh;        
     }
 }
 
-console.log(encMessage)
+
+console.log(decMessage)
+
 
 }
 
-starEnigma([
-    '3',
-    "tt(''DGsvywgerx>6444444444%H%1B9444",
-    //'GQhrr|A977777(H(TTTT',
-    //'EHfsytsnhf?8555&I&2C9555SR'
-])
+starEnigma(
+    ['3',
+        "tt(''DGsvywgerx>6444444444%H%1B9444",
+        //'GQhrr|A977777(H(TTTT',
+        //'EHfsytsnhf?8555&I&2C9555SR'
+        ]
+    )
