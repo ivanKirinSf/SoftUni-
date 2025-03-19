@@ -2,57 +2,25 @@ function starEnigma(input){
 
 let num = input.shift();
 
-let codePattern = /[STARstar]/g;
+let patternStar = /[STARstar]/g;
 
 let pattern = /[^@\-!:>\s]*@(?<name>[A-Za-z]+)[^@\-!:>]*:(?<population>\d+)[^@\-!:>\s]*!(?<type>[A|D])![^@\-!:>\s]*\->(?<count>\d+)/;
 
-let newMessage = "";
-
-let planetAttackList = new Set();
-
-let planetDestructionList = new Set();
-
 for(let line of input){
 
-    let counter = 0;
+ let counter = 0;
+ 
+ let match = line.match(patternStar);
 
-    let match = codePattern.exec(line);
+ while(match !== null){
 
-    while(match !== null){
+    counter ++;
 
-        counter ++;
+    match = line.match(patternStar);
+ }
 
-        match = codePattern.exec(line);
-    }
+ console.log(counter)
 
-    for(let char of line){
-
-        let value = char.charCodeAt();
-
-        let res = value - counter;
-
-        let newChar = String.fromCharCode(res);
-
-        newMessage += newChar
-
-        //console.log(newChar)
-    }
-}
-
-if(pattern.test(newMessage)){
-
-    let match = newMessage.match(pattern);
-
-    if(match.groups.type === "A"){
-
-        planetAttackList.add(match.groups.name);        
-    }
-
-    if(match.groups.type === "D"){
-
-        planetDestructionList.add(match.groups.name);
-
-    }
 }
 
 }
