@@ -8,21 +8,64 @@ let pattern = /[^@\-!:>\s]*@(?<name>[A-Za-z]+)[^@\-!:>]*:(?<population>\d+)[^@\-
 
 let counter = 0;
 
-for(let line of input){ 
+let newMes = "";
+
+let attackedPlanetsList = new Set();
+
+let destroyedPlanetsList = new Set();
+
+for(let line of input){
+
+   counter = 0;
+
+   let match = starCode.exec(line);
+
+   while(match !== null){
+
+    counter ++;
+
+    match = starCode.exec(line);
+
+   }
+
+   for(let ch of line){
+
+    let value = ch.charCodeAt();
+
+    let res = value - counter;
+
+    let character = String.fromCharCode(res);
+
+    newMes += character;
     
-        let match = starCode.exec(line);
-
-        if(match !== null){
-
-           counter ++;
-
-           match = starCode.exec(line);
-
-        }  
-        
-        console.log(counter)
-
+   }   
+   
 }
+
+if(pattern.exec(newMes)){
+
+    let match = pattern.exec(newMes);
+
+    if(match.groups.type === "A"){
+
+        attackedPlanetsList.add(match)       
+
+    }
+
+    if(match.groups.type === "D"){
+
+        destroyedPlanetsList.add(match)
+    }
+
+  }
+
+console.log(`Attacked planets: ${attackedPlanetsList.size}`)
+
+let sortedAttacked = attackedPlanetsList.sort((a,b)=> a[0].localeCompare(b[0]));
+
+console.table(sortedAttacked)
+
+//console.log(`-> ${sortedAttacked[0]}`)
 
 }
 
