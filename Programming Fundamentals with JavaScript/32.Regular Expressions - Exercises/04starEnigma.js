@@ -10,37 +10,67 @@ let counter = 0;
 
 let newMess = "";
 
+let attackedPlanetsList = new Set();
+
+let destroyedPlanetsList = new Set();
+
 for(let line of input){
 
-      let match = starCode.exec(line);
+  let match = starCode.exec(line);
 
-      while(match !== null){
+  while(match !== null){
 
-        counter ++;
+    counter ++;
 
-        match = starCode.exec(line);
+   match = starCode.exec(line)
 
-      }
+  }
 
-      //console.log(counter)
+  for(let ch of line){
+     
+    let value = ch.charCodeAt();
 
-      for(let ch of line){
+    let res = value - counter;
 
-        let value = ch.charCodeAt();
+    let char = String.fromCharCode(res);
 
-        let res = value - counter;
+    newMess += char;
 
-        let char = String.fromCharCode(res);
-
-        newMess += char;
-
-        //console.log(char)
-
-      }
-
-      console.log(newMess)
-
+  }
 }
+
+if(pattern.test(newMess)){
+
+  let match = pattern.exec(newMess);
+
+  if(match.groups.type === "A"){
+
+    attackedPlanetsList.add(match.groups.name);
+
+  }
+
+  if(match.groups.type === "D"){
+
+    destroyedPlanetsList.add(match.groups.name); 
+
+  }
+}
+
+console.log(`Attacked planets: ${attackedPlanetsList.size}`);
+
+for(let planet in attackedPlanetsList){
+
+  console.log(`-> ${planet}`)
+}
+
+console.log(`Destroyed planets: ${destroyedPlanetsList.size}`);
+
+for(let planet of attackedPlanetsList){
+
+  console.log(`-> ${planet}`)
+}
+
+//console.log(newMess)
 
 }
 
