@@ -1,11 +1,10 @@
 function extractEmails(input){
 
+  let pattern = /(?<=\s|^)([A-Za-z0-9]+[A-Za-z0-9.\-_]*)@([a-z]+\-?[a-z]+)(\.[a-z]+)+/g;
 
-    let pattern = /(?<=s\|^)([A-Za-z0-9]+[A-Za-z0-9./-_])+([a-z]*)+([a-z])/g;
+  let mails = input.match(pattern);
 
-    let mails = pattern.match(input);
-
-    mails.forEach(x => console.log(x));
+  mails.forEach(x => console.log(x));
 
 }
 
