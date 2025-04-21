@@ -1,0 +1,70 @@
+function theImitationGame(input){
+
+    let message = input.shift();
+
+    for(let i = 0; i < input.length; i++){
+
+        let temp = input[i];
+
+        if( temp === "Decode"){
+            break;
+        }
+
+        let str = temp.split("|");
+
+        let command = str.shift();
+
+        if(command === "ChangeAll"){
+            let substring = str.shift();
+            let replacement = str.shift();
+            let replMessage = message;
+            
+            while(replMessage.includes(substring)){
+
+                replMessage = replMessage.replace(substring, replacement)
+            
+                
+            }
+
+            message = replMessage;
+
+        }else if(command === "Insert"){
+
+            let index = str.shift();
+
+            let value = str.shift();
+
+            let end = message.length;
+
+            let sub1 = message.substring(0,index);
+
+            let sub2 = message.substring(index, end);
+
+            message = `${sub1}`+`${value}`+`${sub2}`
+
+            //console.log(sub2)
+
+        }
+
+        
+
+
+
+        
+    }
+
+    console.log(message)
+
+
+
+}
+
+theImitationGame(
+    [
+        'zzHe',
+        'ChangeAll|z|l',
+        'Insert|2|o',
+        'Move|3',
+        'Decode'
+      ]
+    )
