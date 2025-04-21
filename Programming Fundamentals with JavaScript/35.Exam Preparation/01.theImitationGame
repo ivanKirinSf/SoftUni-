@@ -21,8 +21,7 @@ function theImitationGame(input){
             
             while(replMessage.includes(substring)){
 
-                replMessage = replMessage.replace(substring, replacement)
-            
+                replMessage = replMessage.replace(substring, replacement);            
                 
             }
 
@@ -44,27 +43,35 @@ function theImitationGame(input){
 
             //console.log(sub2)
 
-        }
+        }else if(command === "Move"){
 
-        
+            let num = Number(str.shift());
 
+            let end = message.length;
 
+            let sub = message.substring(0,num);
 
-        
+            let sub2 = message.substring(num, end);
+
+            message = `${sub2}`+`${sub}`;             
+
+            //console.log(message)
+
+        }           
     }
-
-    console.log(message)
-
-
+    
+    console.log(`The decrypted message is: ${message}`);
 
 }
 
 theImitationGame(
     [
-        'zzHe',
-        'ChangeAll|z|l',
-        'Insert|2|o',
+        'owyouh',
+        'Move|2',
         'Move|3',
+        'Insert|3|are',
+        'Insert|9|?',
         'Decode'
       ]
+      
     )
