@@ -1,6 +1,15 @@
 function adAstra(input){
 
-    let pattern = / /g;
+    let pattern = /([\|#])(?<name>[A-Za-z]+)([\|#])(?<date>[\d{2}\/\d{2}\/\d{2}]+)([\|#])(?<calories>\d+)/g;
+
+    let exec = pattern.exec(input)
+
+    while(exec){
+
+        let name = pattern.groups.name;
+
+        console.log(name)
+    }
 
 }
 
