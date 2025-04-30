@@ -1,45 +1,45 @@
-function adAstra(input){
+function solve(input){
 
-    let pattern = /([\|#])(?<name>[A-Za-z ]+)\1(?<date>\d{2}\/\d{2}\/\d{2})\1(?<calories>\d+)\1/gm;
-
-    let totalCalories = 0;
-
-    let dailyCal = 2000;
-
-    let info = [];
+    let pattern = /([\|#])(?<name>[A-Za-z ]+)\1(?<date>\d{2}\/\d{2}\/\d{2})\1(?<calories>\d+)\1/g;
 
     let exec = pattern.exec(input);
 
+    let totalCal = 0;
+
+    let days = 0;
+
+    let arr = [];
+
     while(exec){
-           
+
         let name = exec.groups.name;
-
         let date = exec.groups.date;
-
-        let calories = exec.groups.calories;
-
-        totalCalories += Number(calories);
-
-        let data = `Item: ${name}, Best before: ${date}, Nutrition: ${calories}`
-
-        info.push(data);
+        let cal = exec.groups.calories;
 
         exec = pattern.exec(input);
 
+        totalCal += Number(cal);
+
+        let text = `Item: ${name}, Best before: ${date}, Nutrition: ${cal}`;
+
+        arr.push(text);
+
+        //console.log(totalCal)
     }
 
-    let daysLeft = Math.floor(totalCalories/dailyCal);
+    days = Math.floor(totalCal/2000);
 
-    console.log(`You have food to last you for: ${daysLeft} days!`);
+    console.log(`You have food to last you for: ${days} days!`);
 
-    for(let line of info){
+    for(let el of arr){
 
-        console.log(line);
+        console.log(el);
+
     }
-    
 
 }
 
-adAstra([ '$$#@@%^&#Fish#24/12/20#8500#|#Incorrect#19.03.20#450|$5*(@!#Ice Cream#03/10/21#9000#^#@aswe|Milk|05/09/20|2000|'
- ]
+solve([
+    '#Bread#19/03/21#4000#|Invalid|03/03.20||Apples|08/10/20|200||Carrots|06/08/20|500||Not right|6.8.20|5|'
+    ]
     )
