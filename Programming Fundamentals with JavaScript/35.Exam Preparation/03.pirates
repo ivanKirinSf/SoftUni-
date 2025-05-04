@@ -1,0 +1,171 @@
+function pirates(data) {
+
+    let index = data.indexOf("Sail");
+
+    let arrTowns = data.slice(0, index);
+
+    let arrCom = data.slice(index + 1, data.length);
+
+    let town = {};
+
+    let arrCities = [];
+
+    let final = [];
+
+    for (let el of arrTowns) {
+
+        let elInfo = el.split("||");
+
+        let cityName = elInfo.shift();
+
+        town.name = cityName;
+
+        let cityPopulation = elInfo.shift();
+
+        town.population = cityPopulation;
+
+        let cityGold = elInfo.shift();
+
+        town.gold = cityGold;
+
+        arrCities.push(town);
+
+        town = {};
+
+    }
+
+    //console.table(arrCities);
+
+    for (let el of arrCom) {
+
+        let elInfo = el.split("=>");
+
+        let command = elInfo.shift();
+
+        if (command === "Plunder") {
+
+            let city = elInfo.shift();
+
+            let killedP = Number(elInfo.shift());
+
+            let stollenG = Number(elInfo.shift());
+
+            for (let line of arrCities) {
+
+                let index = arrCities.indexOf(line)
+
+                if (line['name'] === city) {
+
+                    if (line['population'] <= killedP) {
+
+                        arrCities.splice(index, 1);
+
+                        console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`)
+
+                        console.log(`${city} has been wiped off the map!`);
+                        break;
+                    } else {
+
+                        let res = line['population'] - killedP;
+                        line['population'] = res;
+                    }
+
+                    if(stollenG < 0){
+                        console.log("Gold added cannot be a negative number!");
+                        continue;
+                    }
+
+                    if (line['gold'] <= stollenG) {
+
+                        arrCities.splice(index, 1);
+
+                        console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`);
+
+                        console.log(`${city} has been wiped off the map!`);
+                        break;
+
+                    } else {
+
+                        let res = line['gold'] - stollenG;
+                        line['gold'] = res;
+
+                        
+                    }
+
+                    console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`)
+                }
+            }
+        }
+
+        if(command === "Prosper"){
+
+            let city = elInfo.shift();
+
+            let treasure = Number(elInfo.shift());
+
+            if(treasure < 0){
+
+                console.log("Gold added cannot be a negative number!");
+
+                continue;
+            }
+
+            for (let line of arrCities) {
+
+                if (line['name'] === city){
+
+                    let res = Number(line['gold']) + treasure;
+                        line['gold'] = res;
+
+                        console.log(`${treasure} gold added to the city treasury. ${city} now has ${line['gold']} gold.`)
+                }
+            }            
+
+        }
+
+        if(command === "End"){
+
+            if(arrCities){
+
+                let temp1 = arrCities.shift();
+
+                for(let i = 0; i < arrCities.length; i++){
+
+                    let temp2 = arrCities[i];
+
+                    if(temp1['name'] === temp2['name']){
+
+                        temp1['population'] =+ temp2['population'];
+
+                        temp1['gold'] =+ temp2['gold'];
+
+                        arrCities = arrCities.splice(i, 1);
+
+                        final.push(temp1);
+
+                        temp1 = [];
+                    }else{
+
+                        final.push(temp1);
+
+                        temp1 = [];
+                    }
+                }
+
+                console.log(`Ahoy, Captain! There are ${final.length} wealthy settlements to go to:`)
+
+                for(let el of final){
+
+                    console.log(`${el['name']} -> Population: ${el['people']} citizens, Gold: ${el['gold']} kg`);
+
+                }
+            }
+
+        }
+    }
+
+
+
+    console.table(arrCities)
+
+}
