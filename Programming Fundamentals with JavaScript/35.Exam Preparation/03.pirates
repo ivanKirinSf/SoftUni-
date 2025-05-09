@@ -70,7 +70,7 @@ function pirates(data) {
                         line['population'] = res;
                     }
 
-                    if(stollenG < 0){
+                    if (stollenG < 0) {
                         console.log("Gold added cannot be a negative number!");
                         continue;
                     }
@@ -89,7 +89,7 @@ function pirates(data) {
                         let res = line['gold'] - stollenG;
                         line['gold'] = res;
 
-                        
+
                     }
 
                     console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`)
@@ -97,13 +97,13 @@ function pirates(data) {
             }
         }
 
-        if(command === "Prosper"){
+        if (command === "Prosper") {
 
             let city = elInfo.shift();
 
             let treasure = Number(elInfo.shift());
 
-            if(treasure < 0){
+            if (treasure < 0) {
 
                 console.log("Gold added cannot be a negative number!");
 
@@ -112,53 +112,30 @@ function pirates(data) {
 
             for (let line of arrCities) {
 
-                if (line['name'] === city){
+                if (line['name'] === city) {
 
                     let res = Number(line['gold']) + treasure;
-                        line['gold'] = res;
+                    line['gold'] = res;
 
-                        console.log(`${treasure} gold added to the city treasury. ${city} now has ${line['gold']} gold.`)
+                    console.log(`${treasure} gold added to the city treasury. ${city} now has ${line['gold']} gold.`)
                 }
-            }            
+            }
 
         }
 
-        if(command === "End"){
+        if (command === "End") {
 
             if(arrCities){
 
-                let temp1 = arrCities.shift();
+                for(let line of arrCities){
 
-                for(let i = 0; i < arrCities.length; i++){
-
-                    let temp2 = arrCities[i];
-
-                    if(temp1['name'] === temp2['name']){
-
-                        temp1['population'] =+ temp2['population'];
-
-                        temp1['gold'] =+ temp2['gold'];
-
-                        arrCities = arrCities.splice(i, 1);
-
-                        final.push(temp1);
-
-                        temp1 = [];
-                    }else{
-
-                        final.push(temp1);
-
-                        temp1 = [];
-                    }
+                    console.log(line["name"])
                 }
 
-                console.log(`Ahoy, Captain! There are ${final.length} wealthy settlements to go to:`)
+            }else{
 
-                for(let el of final){
+                console.log("Ahoy, Captain! All targets have been plundered and destroyed!");
 
-                    console.log(`${el['name']} -> Population: ${el['people']} citizens, Gold: ${el['gold']} kg`);
-
-                }
             }
 
         }
@@ -166,6 +143,24 @@ function pirates(data) {
 
 
 
-    console.table(arrCities)
+    //console.table(arrCities)
 
 }
+
+pirates(
+    ([
+        "Nassau||95000||1000",
+        "San Juan||930000||1250",
+        "Campeche||270000||690",
+        "Port Royal||320000||1000",
+        "Port Royal||100000||2000",
+        "Sail",
+        "Prosper=>Port Royal=>-200",
+        "Plunder=>Nassau=>94000=>750",
+        "Plunder=>Nassau=>1000=>150",
+        "Plunder=>Campeche=>150000=>690",
+        "End"
+    ])
+
+
+)
