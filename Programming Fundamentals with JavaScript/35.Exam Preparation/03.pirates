@@ -1,160 +1,61 @@
 function pirates(data) {
 
-    let index = data.indexOf("Sail");
+let city = {};
 
-    let arrTowns = data.slice(0, index);
+let arr = [];
 
-    let arrCom = data.slice(index + 1, data.length);
+for(let i = 0; i < data.length; i++){
+     
+     let temp = data.shift();
 
-    let town = {};
+     if(temp !== "End"){
 
-    let arrCities = [];
+        let info = temp.split("||");
 
-    let final = [];
+        let cityName = info[0];
 
-    for (let el of arrTowns) {
+        city.name = cityName;
 
-        let elInfo = el.split("||");
+        let people = Number(info[1]);
 
-        let cityName = elInfo.shift();
+        city.population = people;
 
-        town.name = cityName;
+        let gold = Number(info[2]);
 
-        let cityPopulation = elInfo.shift();
+        city.gold = gold;
 
-        town.population = cityPopulation;
+        let res = arr.find(a => a.name === cityName);
 
-        let cityGold = elInfo.shift();
+        let index = arr.indexOf(res);
 
-        town.gold = cityGold;
+        if(index >= 0){
 
-        arrCities.push(town);
+        arr[index].population += people;
 
-        town = {};
+        arr[index].gold += gold;
 
-    }
+        }else{
 
-    //console.table(arrCities);
+            arr.push(city);
 
-    for (let el of arrCom) {
+        }       
 
-        let elInfo = el.split("=>");
+        city = {};
+     }
+}
 
-        let command = elInfo.shift();
-
-        if (command === "Plunder") {
-
-            let city = elInfo.shift();
-
-            let killedP = Number(elInfo.shift());
-
-            let stollenG = Number(elInfo.shift());
-
-            for (let line of arrCities) {
-
-                let index = arrCities.indexOf(line)
-
-                if (line['name'] === city) {
-
-                    if (line['population'] <= killedP) {
-
-                        arrCities.splice(index, 1);
-
-                        console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`)
-
-                        console.log(`${city} has been wiped off the map!`);
-                        break;
-                    } else {
-
-                        let res = line['population'] - killedP;
-                        line['population'] = res;
-                    }
-
-                    if (stollenG < 0) {
-                        console.log("Gold added cannot be a negative number!");
-                        continue;
-                    }
-
-                    if (line['gold'] <= stollenG) {
-
-                        arrCities.splice(index, 1);
-
-                        console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`);
-
-                        console.log(`${city} has been wiped off the map!`);
-                        break;
-
-                    } else {
-
-                        let res = line['gold'] - stollenG;
-                        line['gold'] = res;
-
-
-                    }
-
-                    console.log(`${city} plundered! ${stollenG} gold stolen, ${killedP} citizens killed.`)
-                }
-            }
-        }
-
-        if (command === "Prosper") {
-
-            let city = elInfo.shift();
-
-            let treasure = Number(elInfo.shift());
-
-            if (treasure < 0) {
-
-                console.log("Gold added cannot be a negative number!");
-
-                continue;
-            }
-
-            for (let line of arrCities) {
-
-                if (line['name'] === city) {
-
-                    let res = Number(line['gold']) + treasure;
-                    line['gold'] = res;
-
-                    console.log(`${treasure} gold added to the city treasury. ${city} now has ${line['gold']} gold.`)
-                }
-            }
-
-        }
-
-        if (command === "End") {
-
-            if(arrCities){
-
-                for(let line of arrCities){
-
-                    console.log(line["name"])
-                }
-
-            }else{
-
-                console.log("Ahoy, Captain! All targets have been plundered and destroyed!");
-
-            }
-
-        }
-    }
-
-
-
-    //console.table(arrCities)
+console.table(arr)
 
 }
 
 pirates(
     ([
-        "Nassau||95000||1000",
-        "San Juan||930000||1250",
-        "Campeche||270000||690",
-        "Port Royal||320000||1000",
-        "Port Royal||100000||2000",
-        "Sail",
+        //"Nassau||95000||1000",
+        //"San Juan||930000||1250",
+        //"Campeche||270000||690",
+        //"Port Royal||320000||1000",
+        //"Port Royal||100000||2000",
+        //"Sail",
         "Prosper=>Port Royal=>-200",
         "Plunder=>Nassau=>94000=>750",
         "Plunder=>Nassau=>1000=>150",
