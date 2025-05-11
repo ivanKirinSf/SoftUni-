@@ -83,9 +83,11 @@ for(let j = 0; j < data.length; j++){
 
             arr[index].gold -= stolenGold;
 
-            if(arr[index].people <= 0 || arr[index].gold <= 0){
+            if(arr[index].population <= 0 || arr[index].gold <= 0){
 
                 arr.splice(index, 1)
+
+                console.log(`${town} plundered! ${stolenGold} gold stolen, ${killed} citizens killed.`)
 
                 console.log(`${town} has been wiped off the map!`)
 
@@ -98,36 +100,63 @@ for(let j = 0; j < data.length; j++){
 
     }else if(command === "Prosper"){
 
-        let town = temp[1];
+        let town = temp[1];        
 
-        let treasury = temp[2];
+        let treasury = Number(temp[2]);
 
-    }
+        if(treasury < 0){
 
-    //let town = temp[1];
+            console.log("Gold added cannot be a negative number!");
+            
+        }else{
 
-    //console.log(town)
+            let res = arr.find(b => b.name === town);
+
+            let index = arr.indexOf(res);
+
+            if(index !== -1){
+
+                arr[index].gold += treasury;
+
+                console.log(`${treasury} gold added to the city treasury. ${town} now has ${arr[index].gold} gold.`)
+
+            }            
+
+        }        
+
+    }else if(command === "End"){
+
+        if(arr.length > 0){
+
+          console.log(`Ahoy, Captain! There are ${arr.length} wealthy settlements to go to:`)
+
+          for(let line of arr){
+
+             console.log(`${line.name} -> Population: ${line.population} citizens, Gold: ${line.gold} kg`)
+
+          }
+
+        }else {
+
+            console.log("Ahoy, Captain! All targets have been plundered and destroyed!");
+
+        }
+
+    }   
 
 }
 
-console.table(arr)
-
 }
 
-pirates(
-    ([
-        "Nassau||95000||1000",
-        "San Juan||930000||1250",
-        "Campeche||270000||690",
-        "Port Royal||320000||1000",
-        "Port Royal||100000||2000",
-        "Sail",
-        //"Prosper=>Port Royal=>-200",
-        //"Plunder=>Nassau=>94000=>750",
-        //"Plunder=>Nassau=>1000=>150",
-        "Plunder=>Campeche=>300000=>690",
-        "End"
-    ])
-
-
-)
+pirates
+([
+    "Tortuga||345000||1250",
+    "Santo Domingo||240000||630",
+    "Havana||410000||1100",
+    "Sail",
+    "Plunder=>Tortuga=>75000=>380",
+    "Prosper=>Santo Domingo=>180",
+    "End"
+])
+    
+    
