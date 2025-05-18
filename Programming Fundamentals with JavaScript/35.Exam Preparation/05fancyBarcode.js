@@ -12,7 +12,7 @@ function fancyBarcode(input){
 
         let str = input[i];
 
-        if((isValid = pattern.exec(str)) !== null){
+        if((pattern.test(str)) !== null){
 
                let codePatttern = /[0-9]/g;            
 
@@ -33,7 +33,7 @@ function fancyBarcode(input){
                }  
 
                
-        }else if((isValid = pattern.exec(str)) === null){
+        }else{
 
             console.log("Invalid barcode");
 
@@ -43,8 +43,11 @@ function fancyBarcode(input){
 }
 
 fancyBarcode([
-"3",
-"@#FreshFisH@#",
-"@###Brea0D@###",
-"@##Che4s6E@##"
+"6",
+"@###Val1d1teM@###",
+"@#ValidIteM@#",
+"##InvaliDiteM##",
+"@InvalidIteM@",
+"@#Invalid_IteM@#",
+"@#ValiditeM@#"
 ])
