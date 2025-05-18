@@ -1,55 +1,45 @@
 function fancyBarcode(input){
 
-    let isValid = true;
-
-    
-
-
     let n = input.shift();
 
-    for(let line of input){
+    let group = "";
 
-        let str = line.split("");
+    let isValid = [];
 
-        if(str[0] === "@"){
+    let pattern = /[@#]+[A-Z][A-Za-z0-9+]{4,}[@#]+/gm;
 
-            let spliced = str.splice(0, 1);
+    for(let i =0; i <= input.length; i++){
 
-            let counter = 0;
+        let str = input[i];
 
-            index = 0;
-            while(str[index] ==="#"){
+        if((isValid = pattern.exec(str)) !== null){
 
-                let spliced = str.splice(0, 1);
+               let codePatttern = /[0-9]/g;            
 
-                counter += 1;
+               let matches = str.match(codePatttern);
 
-                index++;
-            }
+               if(matches){
 
-            if(counter < 0){
+                group = matches.join("");
 
-                isValid = false;
+                console.log(`Product group: ${group}`)
 
-                continue;
+               }else if(matches === null){
 
+               group = "00";
 
-            }else if(counter > 0){
+               console.log(`Product group: ${group}`)
 
-                
-            }
+               }  
 
-            
-        }else if(str[0] !== "@"){
+               
+        }else if((isValid = pattern.exec(str)) === null){
 
-            isValid = false;
+            console.log("Invalid barcode");
 
-        }
+        }       
+
     }
-
-    //console.log(input)
-
-
 }
 
 fancyBarcode([
