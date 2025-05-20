@@ -12,7 +12,11 @@ function fancyBarcode(input){
 
         let str = input[i];
 
-        if((pattern.test(str)) !== null){
+        let wordss = str.match(pattern);
+
+        //console.log(wordss)
+
+        if(pattern.test(str) === true){
 
                let codePatttern = /[0-9]/g;            
 
