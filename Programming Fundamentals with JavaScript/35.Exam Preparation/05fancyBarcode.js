@@ -1,57 +1,49 @@
 function fancyBarcode(input){
 
-    let n = input.shift();
+    let num = Number(input.shift());
 
-    let group = "";
-
-    let isValid = [];
+    //console.log(num);
 
     let pattern = /[@#]+[A-Z][A-Za-z0-9+]{4,}[@#]+/gm;
 
-    for(let i =0; i <= input.length; i++){
+    let digitsPat = /[0-9]+/g;
 
-        let str = input[i];
+    for(let i = 0; i < num; i++){
 
-        let wordss = str.match(pattern);
+        let temp = input[i];
 
-        //console.log(wordss)
+        if(pattern.test(temp)){
 
-        if(pattern.test(str) === true){
+            let dig = temp.match(digitsPat);
 
-               let codePatttern = /[0-9]/g;            
+            if(dig !== null){
 
-               let matches = str.match(codePatttern);
+                console.log(`Product group: ${dig.join("")}`);
 
-               if(matches){
+                continue;
+            }
+            
+            if(dig === null) {
 
-                group = matches.join("");
+                console.log(`Product group: 00`)
 
-                console.log(`Product group: ${group}`)
+            }
 
-               }else if(matches === null){
+            
 
-               group = "00";
-
-               console.log(`Product group: ${group}`)
-
-               }  
-
-               
         }else{
 
             console.log("Invalid barcode");
-
-        }       
-
+            
+        }
     }
+    
 }
 
-fancyBarcode([
-"6",
-"@###Val1d1teM@###",
-"@#ValidIteM@#",
-"##InvaliDiteM##",
-"@InvalidIteM@",
-"@#Invalid_IteM@#",
-"@#ValiditeM@#"
+fancyBarcode
+([
+"3",
+//"@#FreshFisH@#",
+"@###Brea0D@###",
+//"@##Che4s6E@##"
 ])
