@@ -4,46 +4,43 @@ function fancyBarcode(input){
 
     //console.log(num);
 
-    let pattern = /[@#]+[A-Z][A-Za-z0-9+]{4,}[@#]+/gm;
+    let pattern = /@#+[A-Z][A-Za-z0-9]{4,}[A-Z]@#+/;
 
-    let digitsPat = /[0-9]+/g;
+   let digitsPat = /[0-9]/g;
 
-    for(let i = 0; i < num; i++){
+   for(let i = 0; i < num; i++){
 
-        let temp = input[i];
+    let temp = input[i];
 
         if(pattern.test(temp)){
 
-            let dig = temp.match(digitsPat);
+            let digits = temp.match(digitsPat);
 
-            if(dig !== null){
+            if(digits){
 
-                console.log(`Product group: ${dig.join("")}`);
+                let productGroup = digits.join("");
 
-                continue;
-            }
+                console.log(`Product group: ${productGroup}`);
+
+            }else{
+
+                console.log(`Product group: 00`);
+
+            }            
             
-            if(dig === null) {
+        }else {
 
-                console.log(`Product group: 00`)
+            console.log("Invalid barcode")
 
-            }
-
-            
-
-        }else{
-
-            console.log("Invalid barcode");
-            
         }
-    }
+   }
     
 }
 
 fancyBarcode
 ([
 "3",
-//"@#FreshFisH@#",
+"@#FreshFisH@#",
 "@###Brea0D@###",
-//"@##Che4s6E@##"
+"@##Che4s6E@##"
 ])
