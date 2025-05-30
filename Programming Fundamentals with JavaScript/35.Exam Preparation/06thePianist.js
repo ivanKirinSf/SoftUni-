@@ -71,6 +71,35 @@ function thePianist(input){
 
                }
 
+            }else if(command === "Remove"){
+
+                let nameOfPiece = current.shift();
+
+                for(let j = 0; j < collection.length; j++){
+
+                    let line = collection[j];
+
+                    if(Object.values(line).includes(nameOfPiece)){
+
+                        collection.splice(j, 1)
+
+                        console.log(`Successfully removed ${nameOfPiece}!`)
+                    }else{
+
+
+                        console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
+                    }
+
+                }                   
+
+            }else if(command === "ChangeKey"){
+
+                let nameOfPiece = current.shift();
+
+                let keyOfPiece = current.shift();
+
+                
+
             }
         }
     }
@@ -90,11 +119,11 @@ thePianist(
   'Fur Elise|Beethoven|A Minor',
   'Moonlight Sonata|Beethoven|C# Minor',
   'Clair de Lune|Debussy|C# Minor',
-  'Add|Sonata No.2|Chopin|B Minor',
-  'Add|Hungarian Rhapsody No.2|Liszt|C# Minor',
-  'Add|Fur Elise|Beethoven|C# Minor',
+  //'Add|Sonata No.2|Chopin|B Minor',
+  //'Add|Hungarian Rhapsody No.2|Liszt|C# Minor',
+  //'Add|Fur Elise|Beethoven|C# Minor',
   'Remove|Clair de Lune',
-  'ChangeKey|Moonlight Sonata|C# Major',
+  //'ChangeKey|Moonlight Sonata|C# Major',
   'Stop'  
 ]
 )
