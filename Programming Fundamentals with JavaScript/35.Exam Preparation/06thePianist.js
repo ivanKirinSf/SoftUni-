@@ -33,7 +33,7 @@ function thePianist(input){
 
     for(let el of input){
 
-        if(el=== "Stop"){
+        if(el === "Stop"){
 
             break;
         }else{
@@ -50,12 +50,27 @@ function thePianist(input){
 
                let typeOfKey = current.shift();
 
+               let included = true;
+
                for(let line of collection){
 
                 if(Object.values(line).includes(nameOfPiece)){
 
-                    console.log(`${nameOfPiece} is already in the collection!`)
+                    console.log(`${nameOfPiece} is already in the collection!`);
+
+                    included = true;
+
+                    break;
+
                 }else{
+
+                    included = false;
+
+                }
+
+               }
+
+               if(included === false){
 
                     info.piece = nameOfPiece;
 
@@ -63,17 +78,19 @@ function thePianist(input){
 
                     info.key = typeOfKey;
 
-                    console.log(`${nameOfPiece} by ${nameOfComposer} in ${typeOfKey} added to the collection!`)
+                    collection.push(info);
 
-                }
-
-
+                    console.log(`${nameOfPiece} by ${nameOfComposer} in ${typeOfKey} added to the collection!`);
+                    
+                    info = {};
 
                }
 
             }else if(command === "Remove"){
 
                 let nameOfPiece = current.shift();
+
+                let included = true;
 
                 for(let j = 0; j < collection.length; j++){
 
@@ -83,14 +100,25 @@ function thePianist(input){
 
                         collection.splice(j, 1)
 
-                        console.log(`Successfully removed ${nameOfPiece}!`)
+                        console.log(`Successfully removed ${nameOfPiece}!`);
+
+                        included = true;
+
+                        break;
                     }else{
 
-
-                        console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
+                        included = false;
+                        //console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
                     }
+                }   
+                
+                if(included === false){
 
-                }                   
+                   console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`);
+
+                }     
+                
+
 
             }else if(command === "ChangeKey"){
 
@@ -98,8 +126,35 @@ function thePianist(input){
 
                 let keyOfPiece = current.shift();
 
-                
+                let included = true;
 
+                for(let line of collection){
+
+                    if(Object.values(line).includes(nameOfPiece)){
+
+                        line.key = keyOfPiece;
+
+                        console.log(`Changed the key of ${nameOfPiece} to ${keyOfPiece}!`); 
+                        
+                        included = true;                        
+
+                        break;
+                }else {
+
+                    included = false;
+
+                    //console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
+
+                }
+
+                }  
+
+                if(included === false){
+
+                    console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
+                    
+                    info = {};
+               }
             }
         }
     }
@@ -110,20 +165,20 @@ console.log(`${line[`piece`]} -> Composer: ${line[`compositor`]}, Key: ${line[`k
 
     }
 
-
 }
 
 thePianist(
-    [
-  '3',
-  'Fur Elise|Beethoven|A Minor',
-  'Moonlight Sonata|Beethoven|C# Minor',
-  'Clair de Lune|Debussy|C# Minor',
-  //'Add|Sonata No.2|Chopin|B Minor',
-  //'Add|Hungarian Rhapsody No.2|Liszt|C# Minor',
-  //'Add|Fur Elise|Beethoven|C# Minor',
-  'Remove|Clair de Lune',
-  //'ChangeKey|Moonlight Sonata|C# Major',
-  'Stop'  
+   [
+  '4',
+  'Eine kleine Nachtmusik|Mozart|G Major',
+  'La Campanella|Liszt|G# Minor',
+  'The Marriage of Figaro|Mozart|G Major',
+  'Hungarian Dance No.5|Brahms|G Minor',
+  'Add|Spring|Vivaldi|E Major',
+  'Remove|The Marriage of Figaro',
+  'Remove|Turkish March',
+  'ChangeKey|Spring|C Major',
+  'Add|Nocturne|Chopin|C# Minor',
+  'Stop'
 ]
 )
