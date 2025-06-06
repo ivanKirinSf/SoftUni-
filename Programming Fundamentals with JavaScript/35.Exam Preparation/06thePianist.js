@@ -1,169 +1,24 @@
 function thePianist(input){
 
-    let num = input.shift();
+let num = input.shift();
 
-    let collection = [];
+let musicPieces = {};
 
-    let info = {};
+for(let i = 0; i < num; i++){
+    let temp = input.shift();
 
-    for(let i = 0; i < num; i++){
+    let [tempPiece, tempComposer, tempKey] = temp.split("|");
 
-        let temp = input.shift().split("|");
+    musicPieces[tempPiece] = { composer: tempComposer, key: tempKey}
+}
 
-        let pieceName = temp.shift();
+let commands = input.shift()
 
-        let compositorName = temp.shift();
+while(commands === "Stop"){
 
-        let keyType = temp.shift();
+     console.log(commands)
 
-        info.piece = pieceName;
-
-        info.compositor = compositorName;
-
-        info.key = keyType;
-
-        //console.log(pieceName);
-        //console.log(compositorName);
-        //console.log(keyType);
-
-        collection.push(info);
-
-        info = {};
-    }
-
-    for(let el of input){
-
-        if(el === "Stop"){
-
-            break;
-        }else{
-
-            let current = el.split("|");
-
-            let command = current.shift();
-
-            if(command === "Add"){
-
-               let nameOfPiece = current.shift();
-
-               let nameOfComposer = current.shift();
-
-               let typeOfKey = current.shift();
-
-               let included = true;
-
-               for(let line of collection){
-
-                if(Object.values(line).includes(nameOfPiece)){
-
-                    console.log(`${nameOfPiece} is already in the collection!`);
-
-                    included = true;
-
-                    break;
-
-                }else{
-
-                    included = false;
-
-                }
-
-               }
-
-               if(included === false){
-
-                    info.piece = nameOfPiece;
-
-                    info.compositor = nameOfComposer;
-
-                    info.key = typeOfKey;
-
-                    collection.push(info);
-
-                    console.log(`${nameOfPiece} by ${nameOfComposer} in ${typeOfKey} added to the collection!`);
-                    
-                    info = {};
-
-               }
-
-            }else if(command === "Remove"){
-
-                let nameOfPiece = current.shift();
-
-                let included = true;
-
-                for(let j = 0; j < collection.length; j++){
-
-                    let line = collection[j];
-
-                    if(Object.values(line).includes(nameOfPiece)){
-
-                        collection.splice(j, 1)
-
-                        console.log(`Successfully removed ${nameOfPiece}!`);
-
-                        included = true;
-
-                        break;
-                    }else{
-
-                        included = false;
-                        //console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
-                    }
-                }   
-                
-                if(included === false){
-
-                   console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`);
-
-                }     
-                
-
-
-            }else if(command === "ChangeKey"){
-
-                let nameOfPiece = current.shift();
-
-                let keyOfPiece = current.shift();
-
-                let included = true;
-
-                for(let line of collection){
-
-                    if(Object.values(line).includes(nameOfPiece)){
-
-                        line.key = keyOfPiece;
-
-                        console.log(`Changed the key of ${nameOfPiece} to ${keyOfPiece}!`); 
-                        
-                        included = true;                        
-
-                        break;
-                }else {
-
-                    included = false;
-
-                    //console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
-
-                }
-
-                }  
-
-                if(included === false){
-
-                    console.log(`Invalid operation! ${nameOfPiece} does not exist in the collection.`)
-                    
-                    info = {};
-               }
-            }
-        }
-    }
-
-    for(let line of collection){
-
-console.log(`${line[`piece`]} -> Composer: ${line[`compositor`]}, Key: ${line[`key`]}`)
-
-    }
+}
 
 }
 
