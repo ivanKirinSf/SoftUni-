@@ -1,23 +1,46 @@
 function thePianist(input){
 
-let num = input.shift();
+let num = Number(input.shift());
 
-let musicPieces = {};
+let pieces = {};
 
 for(let i = 0; i < num; i++){
-    let temp = input.shift();
 
-    let [tempPiece, tempComposer, tempKey] = temp.split("|");
+    let [ musicPiece, musicComposer, musicKey ] = input.shift().split("|");
+    
+    pieces[musicPiece] = { composer: musicComposer, key: musicKey }
 
-    musicPieces[tempPiece] = { composer: tempComposer, key: tempKey}
 }
 
-let commands = input.shift()
+let commands = input.shift();
 
-while(commands === "Stop"){
+while(commands !== "Stop"){
 
-     console.log(commands)
+    let commands = input.shift().split("|");
 
+    let command = commands.shift();
+
+    if(command === "Add"){
+
+       console.log("yes");
+
+    }
+
+    let [ musicPiece, musicComposer, musicKey ] = input.shift().split("|");
+
+    if(musicPiece in pieces){
+
+       console.log(`${musicPiece} is already in the collection!`);
+
+    }else{
+
+        pieces[musicPiece] = { composer: musicComposer, key: musicKey };
+
+        console.log(`${musicPiece} by ${musicComposer} in ${musicKey} added to the collection!`)
+
+    }
+    
+    commands = input.shift();
 }
 
 }
