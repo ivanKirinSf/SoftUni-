@@ -6,9 +6,11 @@ let pieces = {};
 
 for(let i = 0; i < num; i++){
 
-    let [ musicPiece, musicComposer, musicKey ] = input.shift().split("|");
-    
-    pieces[musicPiece] = { composer: musicComposer, key: musicKey }
+    let temp = input.shift();
+
+    let [pieceName, pieceComposer, pieceKey] = temp.split("|");
+
+    pieces[pieceName] = {composer: pieceComposer, key: pieceKey};
 
 }
 
@@ -16,31 +18,71 @@ let commands = input.shift();
 
 while(commands !== "Stop"){
 
-    let commands = input.shift().split("|");
+    let temp = commands.split("|");
 
-    let command = commands.shift();
+    let command = temp.shift();
+
+    //console.log(temp)
 
     if(command === "Add"){
 
-       console.log("yes");
+      let [pName, pComposer, pKey] = temp;
+
+      if(pName in pieces){
+
+        console.log(`${pName} is already in the collection!`);
+
+      }else{
+
+        pieces[pName] = {composer: pComposer, key: pKey}
+
+        console.log(`${pName} by ${pComposer} in ${pKey} added to the collection!`)
+
+      }
+
+    }else if(command === "Remove"){
+
+       let pName = temp.shift();
+
+       //console.log(pName)
+
+       if(pName in pieces){
+
+        delete pieces[pName]
+
+        console.log(`Successfully removed ${pName}!`);
+
+       }else{
+
+        console.log(`Invalid operation! ${pName} does not exist in the collection.`);
+        
+       }
+
+    }else if(command === "ChangeKey"){
+
+        let [ pName, pKey] = temp;
+
+        if(pName in pieces){
+
+            pieces[pName].key = pKey;
+
+            console.log(`Changed the key of ${pName} to ${pKey}!`)
+        }
+
+        
 
     }
 
-    let [ musicPiece, musicComposer, musicKey ] = input.shift().split("|");
+    commands = input.shift()
+}
 
-    if(musicPiece in pieces){
+let list = Object.entries(pieces);
 
-       console.log(`${musicPiece} is already in the collection!`);
+//console.table(list)
 
-    }else{
+for(let [pieceName, pieceInfo] of list ){
 
-        pieces[musicPiece] = { composer: musicComposer, key: musicKey };
-
-        console.log(`${musicPiece} by ${musicComposer} in ${musicKey} added to the collection!`)
-
-    }
-    
-    commands = input.shift();
+    console.log(`${pieceName} -> Composer: ${pieceInfo.composer}, Key: ${pieceInfo.key}`)
 }
 
 }
