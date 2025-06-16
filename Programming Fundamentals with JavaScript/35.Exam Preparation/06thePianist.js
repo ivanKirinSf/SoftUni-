@@ -6,99 +6,97 @@ let pieces = {};
 
 for(let i = 0; i < num; i++){
 
-    let temp = input.shift();
+  let temp = input.shift().split("|");
+  
+  let [musicPiece, musicComp, musicKey] = temp;
 
-    let [pieceName, pieceComposer, pieceKey] = temp.split("|");
-
-    pieces[pieceName] = {composer: pieceComposer, key: pieceKey};
-
+  pieces[musicPiece] = { composer: musicComp, key: musicKey };
+  
 }
 
 let commands = input.shift();
 
 while(commands !== "Stop"){
 
-    let temp = commands.split("|");
+ let allCom = commands.split("|");
 
-    let command = temp.shift();
+ let command = allCom.shift();
 
-    //console.log(temp)
+ if(command === "Add"){
 
-    if(command === "Add"){
+  let [musicPiece, musicComp, musicKey] = allCom;
 
-      let [pName, pComposer, pKey] = temp;
+  if(musicPiece in pieces){
 
-      if(pName in pieces){
+     console.log(`${musicPiece} is already in the collection!`);
 
-        console.log(`${pName} is already in the collection!`);
+  }else {
 
-      }else{
+     pieces[musicPiece] = { composer: musicComp, key: musicKey };
 
-        pieces[pName] = {composer: pComposer, key: pKey}
+     console.log(`${musicPiece} by ${musicComp} in ${musicKey} added to the collection!`);
 
-        console.log(`${pName} by ${pComposer} in ${pKey} added to the collection!`)
+  }  
 
-      }
+ }else if(command === "Remove"){
 
-    }else if(command === "Remove"){
+  let musicPiece = allCom.shift();
 
-       let pName = temp.shift();
+  if(musicPiece in pieces){    
 
-       //console.log(pName)
+    delete pieces[musicPiece];
 
-       if(pName in pieces){
+    console.log(`Successfully removed ${musicPiece}!`)
+  }else {
 
-        delete pieces[pName]
+    console.log(`Invalid operation! ${musicPiece} does not exist in the collection.`)
 
-        console.log(`Successfully removed ${pName}!`);
+  }
 
-       }else{
+ }else {
 
-        console.log(`Invalid operation! ${pName} does not exist in the collection.`);
-        
-       }
+  let [musicPiece, musicKey] = allCom;
 
-    }else if(command === "ChangeKey"){
+  if(musicPiece in pieces){
 
-        let [ pName, pKey] = temp;
+    pieces[musicPiece].key = musicKey;
 
-        if(pName in pieces){
+    console.log(`Changed the key of ${musicPiece} to ${musicKey}!`);
 
-            pieces[pName].key = pKey;
+  }else {
 
-            console.log(`Changed the key of ${pName} to ${pKey}!`)
-        }
+    console.log(`Invalid operation! ${musicPiece} does not exist in the collection.`);
 
-        
+  }
 
-    }
+ }
 
-    commands = input.shift()
+ commands = input.shift();
+
 }
 
-let list = Object.entries(pieces);
+let entries = Object.entries(pieces);
 
-//console.table(list)
+for(let [pieceName, pieceInfo] of entries){
 
-for(let [pieceName, pieceInfo] of list ){
+  console.log(`${pieceName} -> Composer: ${pieceInfo.composer}, Key: ${pieceInfo.key}`)
 
-    console.log(`${pieceName} -> Composer: ${pieceInfo.composer}, Key: ${pieceInfo.key}`)
 }
+
 
 }
 
 thePianist(
    [
-  '4',
-  'Eine kleine Nachtmusik|Mozart|G Major',
-  'La Campanella|Liszt|G# Minor',
-  'The Marriage of Figaro|Mozart|G Major',
-  'Hungarian Dance No.5|Brahms|G Minor',
-  'Add|Spring|Vivaldi|E Major',
-  'Remove|The Marriage of Figaro',
-  'Remove|Turkish March',
-  'ChangeKey|Spring|C Major',
-  'Add|Nocturne|Chopin|C# Minor',
-  'Stop'
+  '3',
+  'Fur Elise|Beethoven|A Minor',
+  'Moonlight Sonata|Beethoven|C# Minor',
+  'Clair de Lune|Debussy|C# Minor',
+  'Add|Sonata No.2|Chopin|B Minor',
+  'Add|Hungarian Rhapsody No.2|Liszt|C# Minor',
+  'Add|Fur Elise|Beethoven|C# Minor',
+  'Remove|Clair de Lune',
+  'ChangeKey|Moonlight Sonata|C# Major',
+  'Stop'  
 ]
 )
